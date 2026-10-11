@@ -180,7 +180,7 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
   <header>
     <button id="snd" aria-label="소리 켜기/끄기">🔊</button>
     <h1>건전 카지노</h1>
-    <div class="sub">건전한 신사들의 도파민 놀이터</div>
+    <div class="sub">VIRTUAL MONEY MINI GAMES</div>
   </header>
 
   <div class="bal">
@@ -235,7 +235,7 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
   <!-- 3. 사다리타기 -->
   <div class="panel hidden" id="ladder" data-title="사다리타기">
     <div class="ladder-container"><canvas id="ladder-canvas"></canvas></div>
-    <div class="pay">출발지를 고르세요. 도착한 출구가 🎁면 당첨! (출구는 도착 후 공개) 배당 3.8배</div>
+    <div class="pay">출발지를 고르세요. 도착한 출구가 🎁면 당첨! (출구는 도착 후 공개) 배당 3.84배</div>
     <div class="ladder-picks" id="ladder-picks">
       <label><input type="radio" name="ladder" value="0" checked>1번 출발</label>
       <label><input type="radio" name="ladder" value="1">2번 출발</label>
@@ -256,7 +256,7 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
       <h3>플레이어 카드 (합계: <span id="player-score">0</span>)</h3>
       <div class="cards" id="player-cards"></div>
     </div>
-    <div class="pay">딜러보다 21에 가까우면 승리! (블랙잭 승리 시 2배, 일반 승리 1.9배)</div>
+    <div class="pay">딜러보다 21에 가까우면 승리! (블랙잭 승리 시 2.5배, 일반 승리 2배)</div>
     <div class="bj-controls">
       <button class="go" id="bj-hit" disabled>카드 받기</button>
       <button class="go stand" id="bj-stand" disabled>멈추기</button>
@@ -279,7 +279,7 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
   <!-- 6. 홀짝 -->
   <div class="panel hidden" id="oe" data-title="홀짝">
     <div class="dice-box"><div class="die" id="d0"></div><div class="die" id="d1"></div></div>
-    <div class="pay">두 주사위의 합이 홀수인지 짝수인지 맞혀보세요. 배당 1.9배</div>
+    <div class="pay">두 주사위의 합이 홀수인지 짝수인지 맞혀보세요. 배당 1.92배</div>
     <div class="oe">
       <label><input type="radio" name="oe" value="1" checked>홀</label>
       <label><input type="radio" name="oe" value="0">짝</label>
@@ -319,7 +319,7 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
 <div id="err"></div>
 <div id="over"><div>
   <h2>파산</h2>
-  <p>옥수수밭으로 끌려가게 되었습니다..<br>재도전하시겠습니까?</p>
+  <p>가상 자산을 모두 사용했습니다.<br>100,000GP로 다시 시작할 수 있습니다.</p>
   <button class="go" id="reset" style="font-size:15px">다시 시작</button>
 </div></div>
 
@@ -495,8 +495,8 @@ function hiDpi(cv,w,h){
 }
 
 /* ===== 1. 슬롯머신 ===== */
-// [문양, 배당, 출현 가중치(합 1000)] — 다이아 3.5%, 기대 환수율 약 95%
-const SYM=[['🍋',0.5,210],['🍒',1,220],['🔔',3,220],['⭐',5,170],['7️⃣',7,145],['💎',10,35]];
+// [문양, 배당, 출현 가중치(합 1000)] — 다이아 9%·7 12%·별 19%, 기대 환수율 약 96%
+const SYM=[['🍋',0.5,150],['🍒',1,240],['🔔',3,210],['⭐',5,190],['7️⃣',7,120],['💎',10,90]];
 const SYM_TOTAL=SYM.reduce((a,s)=>a+s[2],0);
 const rs=()=>{let r=Math.random()*SYM_TOTAL;for(let i=0;i<SYM.length;i++){r-=SYM[i][2];if(r<0)return i}return 0};
 const ROWH=82,STOP=30;
@@ -702,7 +702,7 @@ $('ladder-start').onclick=()=>{
     stopMusic();
     const win=col===winExit;showWin=true;drawLadder(rungs,path,total,1);
     playSound(win?'win':'lose');
-    settle(bet,win?bet*3.8:0,m,`${sc+1}번 → ${col+1}번 출구 (${win?'당첨':'꽝'})`);
+    settle(bet,win?bet*3.84:0,m,`${sc+1}번 → ${col+1}번 출구 (${win?'당첨':'꽝'})`);
     // 결과는 다음 판 시작 전까지 그대로 보여 줌
   })(t0);
 };
@@ -766,7 +766,7 @@ function endBJ(type){
   if(type==='bust'){msg='버스트! 패배';playSound('lose')}
   else if(type==='blackjack'){
     if(dsc===21){msg='둘 다 블랙잭! 무승부';payout=bet}
-    else{msg='블랙잭! 승리 (2배)';payout=bet*2;playSound('win')}
+    else{msg='블랙잭! 승리 (2.5배)';payout=bet*2.5;playSound('win')}
   }else{
     const iv=setInterval(()=>{
       if(dsc<17){
@@ -776,7 +776,7 @@ function endBJ(type){
         $('dealer-score').textContent=dsc;
       }else{
         clearInterval(iv);stopMusic();
-        if(dsc>21||psc>dsc){msg='플레이어 승리!';payout=bet*1.9;playSound('win')}
+        if(dsc>21||psc>dsc){msg='플레이어 승리!';payout=bet*2;playSound('win')}
         else if(psc===dsc){msg='무승부 (본전 반환)';payout=bet;playSound('click')}
         else{msg='딜러 승리!';playSound('lose')}
         settle(bet,payout,m,msg);
@@ -824,7 +824,7 @@ $('graph-btn').onclick=()=>{
   graphBet=bet;graphRunning=true;liveIds=['graph-btn'];setBusy(true);startMusic('graph');
   $('graph-btn').textContent='수익 실현';$('graph-btn').classList.add('live');
   currentMult=1;gpts=[{t:0,v:1}];gElapsed=0;$('graph-mult').classList.remove('crash');$('graph-mult').textContent='1.00x';
-  const crashAt=Math.min(50,Math.max(1,0.95/(1-Math.random())));
+  const crashAt=Math.min(50,Math.max(1,0.96/(1-Math.random())));
   gStart=performance.now();let lastPush=0;
   (function frame(now){
     if(!graphRunning)return;
@@ -864,7 +864,7 @@ $('roll').onclick=()=>{
     setDie(e0,d[0]);setDie(e1,d[1]);
     const sum=d[0]+d[1],odd=sum%2;
     playSound(odd===pick?'win':'lose');
-    settle(bet,odd===pick?bet*1.9:0,m,`합계 ${sum} (${odd?'홀':'짝'})`);
+    settle(bet,odd===pick?bet*1.92:0,m,`합계 ${sum} (${odd?'홀':'짝'})`);
   },2200);
 };
 
@@ -873,7 +873,7 @@ let cur=null;
 const drawCard=()=>({r:1+Math.floor(Math.random()*13),s:SU[Math.floor(Math.random()*4)]});
 function paint(el,c){el.className='pcard'+(c.s==='♥'||c.s==='♦'?' red':'');el.innerHTML=RK[c.r-1]+'<small>'+c.s+'</small>'}
 function udOdds(){
-  const f=(p,id,t)=>{const b=$(id),m=p?Math.floor(0.95/p*100)/100:0;b.dataset.m=m;b.innerHTML=t+'<small>'+(m?'×'+m.toFixed(2):'나올 수 없음')+'</small>'};
+  const f=(p,id,t)=>{const b=$(id),m=p?Math.floor(0.96/p*100)/100:0;b.dataset.m=m;b.innerHTML=t+'<small>'+(m?'×'+m.toFixed(2):'나올 수 없음')+'</small>'};
   f((13-cur.r)/13,'up','⬆ 높다');
   f(1/13,'eq','＝ 같다');
   f((cur.r-1)/13,'dn','⬇ 낮다');
