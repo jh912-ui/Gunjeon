@@ -2,209 +2,177 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="theme-color" content="#12233f">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b1627">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>건전 카지노</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
-:root{--navy:#12233f;--navy2:#1f3b62;--bg:#eeece6;--panel:#fff;--panel2:#fff;--line:#d8d4ca;--gold:#c49a50;--gold2:#e1bd76;--ivory:#1d2939;--mute:#667085;--ok:#1f7a5a;--bad:#b42318;--pink:#12233f;--violet:#1f3b62;--serif:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;--sans:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
-html{color-scheme:light;touch-action:manipulation;height:100%}
+:root{
+  --bg:#0b1627;--panel:#14233b;--panel2:#101d33;--inset:#0a1424;--line:#2a3b57;
+  --navy:#1f3b62;--navy2:#2a4a7a;
+  --gold:#d9b366;--gold2:#e8c987;--gold-d:#a97a28;
+  --ivory:#e8edf5;--mute:#93a1b8;
+  --ok:#3ecf9c;--bad:#ff6b5e;--blue:#4c8dff;
+  --sans:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+html{color-scheme:dark;touch-action:manipulation;height:100%;background:var(--bg)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;min-height:100%;color:var(--ivory);font-family:var(--sans);padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(24px + env(safe-area-inset-bottom,0px));overflow-x:hidden;
-background:radial-gradient(90% 50% at 15% -5%,rgba(255,92,138,.35),transparent 60%),radial-gradient(80% 50% at 100% 100%,rgba(124,92,255,.4),transparent 70%),var(--bg)}
+body{margin:0;min-height:100%;color:var(--ivory);font-family:var(--sans);letter-spacing:-.02em;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(24px + env(safe-area-inset-bottom,0px));overflow-x:hidden;
+  background:radial-gradient(circle at top center,rgba(217,179,102,.14),transparent 36%),var(--bg)}
 .wrap{max-width:500px;margin:0 auto}
 button{font-family:inherit}
-button:focus-visible,label:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+button,label{user-select:none;-webkit-user-select:none}
+button:focus-visible,label:focus-within,.lever:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 button:disabled{opacity:.38;cursor:not-allowed}
+.hidden{display:none!important}
 
-header{text-align:center;padding:10px 0 16px}
-h1{font-family:var(--serif);font-weight:400;font-size:36px;letter-spacing:.02em;margin:0;background:linear-gradient(90deg,#ffd23f,#ff5c8a 60%,#a98bff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.rule{height:1px;width:120px;margin:10px auto 8px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.sub{font-size:12px;color:var(--mute);letter-spacing:.08em}
+/* 헤더 */
+header{position:relative;text-align:center;padding:10px 0 16px}
+h1{position:relative;margin:0 0 8px;padding-bottom:14px;font-size:28px;font-weight:800;letter-spacing:-.05em;color:var(--ivory);border-bottom:1px solid var(--gold)}
+h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3px;background:var(--gold);transform:translateX(-50%)}
+.sub{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--gold)}
+#snd{position:absolute;right:0;top:8px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ivory);font-size:18px;cursor:pointer}
 
-.bal{display:flex;justify-content:space-between;align-items:flex-end;padding:18px 20px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(160deg,var(--panel2),var(--panel));box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.04)}
-.bal small{display:block;font-size:12px;color:var(--mute);margin-bottom:4px}
-.bal .big{font-family:var(--serif);font-size:30px;color:var(--gold);letter-spacing:.01em}
-.bal .mx{font-family:var(--serif);font-size:16px;color:var(--ivory)}
+/* 자산 */
+.bal{display:flex;justify-content:space-between;align-items:flex-end;padding:18px 20px;border:1px solid var(--navy2);border-radius:14px;
+  background:linear-gradient(135deg,var(--navy),#142a47);box-shadow:0 12px 35px rgba(0,0,0,.4)}
+.bal small{display:block;font-size:12px;color:#aebbd0;margin-bottom:4px}
+.bal .big{font-size:30px;font-weight:800;color:var(--gold2)}
+.bal .mx{font-size:16px;font-weight:700;color:#fff}
+.bal.up{animation:flashUp .9s}.bal.dn{animation:flashDn .6s}
+@keyframes flashUp{30%{box-shadow:0 0 0 2px var(--ok),0 0 32px rgba(62,207,156,.45)}}
+@keyframes flashDn{30%{box-shadow:0 0 0 2px var(--bad),0 0 24px rgba(255,107,94,.35)}}
 .stats{display:flex;justify-content:space-between;padding:12px 6px 4px;font-size:12px;color:var(--mute)}
-.stats b{color:var(--ivory);font-weight:600;margin-left:4px}
+.stats b{color:var(--ivory);font-weight:700;margin-left:4px}
 
-.tabs{display:flex;gap:6px;margin:14px 0 12px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
-.tabs::-webkit-scrollbar{display:none}
-.tabs button{flex:0 0 auto;padding:10px 14px;background:rgba(255,255,255,.07);border:0;border-radius:99px;color:var(--mute);font-family:var(--serif);font-size:13px;cursor:pointer;transition:all .2s}
-.tabs button.on{color:#fff;background:linear-gradient(135deg,var(--pink),var(--violet))}
+/* 탭 */
+.tabs{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin:14px 0 12px}
+.tabs button{grid-column:span 2;min-height:42px;padding:8px 2px;background:var(--panel);border:1px solid var(--line);border-radius:7px;color:var(--mute);font-size:13px;font-weight:700;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s}
+.tabs button:first-child{grid-column:2/span 2}
+.tabs button:not(.on):not(:disabled):hover{background:#1b2f4d;color:var(--ivory)}
+.tabs button.on{background:var(--navy2);border-color:var(--gold);color:#fff;box-shadow:inset 0 -3px 0 var(--gold)}
 
-.panel{border:1px solid var(--line);border-radius:24px;padding:18px;margin-bottom:14px;background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 18px 40px rgba(0,0,0,.4)}
-.hidden{display:none}
+/* 패널 */
+.panel{position:relative;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;background:linear-gradient(180deg,var(--panel),var(--panel2));box-shadow:0 12px 35px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.04)}
+.panel[data-title]::before{content:attr(data-title);display:block;color:var(--ivory);font-size:17px;font-weight:800;letter-spacing:-.04em;margin:0 0 16px;padding-left:10px;border-left:4px solid var(--gold)}
+
+/* 공통 버튼 */
+.go{width:100%;min-height:46px;margin-top:16px;padding:12px;font-size:15px;font-weight:700;letter-spacing:-.02em;color:#fff;background:var(--navy2);border:1px solid var(--navy2);border-radius:7px;cursor:pointer;box-shadow:0 5px 12px rgba(0,0,0,.3);transition:transform .12s,background .2s,color .2s}
+.go:active:not(:disabled){transform:translateY(1px)}
+.go:hover:not(:disabled){background:var(--gold);border-color:var(--gold);color:#101d33}
+.go.live{background:var(--ok);border-color:var(--ok);color:#06251b}
+.go.stand{background:var(--gold);border-color:var(--gold);color:#101d33}
+.go.stand:hover:not(:disabled){background:var(--gold2);border-color:var(--gold2)}
+.msg{min-height:24px;margin-top:14px;text-align:center;font-size:16px;font-weight:700}
+.msg.win{color:var(--ok)}.msg.lose{color:var(--bad)}
+.msg.win,.msg.lose{animation:pop .4s}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+.pay{font-size:12px;color:var(--mute);text-align:center;line-height:1.7}
+.pay b{color:var(--ivory);font-weight:700}
 
 /* 베팅 콘솔 */
 .bet{display:grid;grid-template-columns:1fr 1.15fr;gap:12px}
-.led{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;padding:12px 16px;border-radius:12px;background:#0c0824;border:1px solid var(--line)}
+.led{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;padding:12px 16px;border-radius:9px;background:var(--inset);border:1px solid var(--line)}
 .led span{font-size:12px;color:var(--mute)}
-.led b{font-family:var(--serif);font-size:24px;color:var(--gold);font-weight:400}
+.led b{font-size:24px;font-weight:800;color:var(--gold)}
 .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.keypad button{padding:11px 0;font-size:16px;font-family:var(--serif);color:var(--ivory);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;cursor:pointer}
-.keypad button:active{background:rgba(150,120,255,.18)}
+.keypad button{padding:11px 0;font-size:16px;font-weight:700;color:var(--ivory);background:var(--panel);border:1px solid var(--line);border-radius:7px;cursor:pointer;transition:background .15s,transform .1s}
+.keypad button:active:not(:disabled){background:#243b5e;transform:scale(.95)}
 .keypad .clr{color:var(--bad)}
 .quick{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start}
-.quick button{padding:14px 0;font-size:13px;color:var(--gold);background:transparent;border:1px solid var(--gold2);border-radius:10px;cursor:pointer}
-.quick button:active{background:rgba(150,120,255,.18)}
+.quick button{padding:14px 0;font-size:13px;font-weight:700;color:var(--gold2);background:transparent;border:1px solid var(--gold);border-radius:7px;cursor:pointer;transition:background .15s,transform .1s}
+.quick button:active:not(:disabled){background:rgba(217,179,102,.18);transform:scale(.95)}
 .quick p{grid-column:1/-1;margin:6px 2px 0;font-size:11px;line-height:1.6;color:var(--mute)}
 
-.go{width:100%;margin-top:16px;padding:15px;font-family:var(--serif);font-size:17px;font-weight:400;letter-spacing:.05em;color:#fff;border:0;border-radius:16px;cursor:pointer;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 10px 24px rgba(124,92,255,.4)}
-.go:active{transform:translateY(1px)}
-.msg{min-height:24px;margin-top:14px;text-align:center;font-size:15px;font-weight:600}
-.win{color:var(--ok)}.lose{color:var(--bad)}
-.pay{font-size:12px;color:var(--mute);text-align:center;line-height:1.7}
-.pay b{color:var(--ivory);font-weight:600}
-
 /* 슬롯 */
-.cab{position:relative;padding:10px;border-radius:24px;background:linear-gradient(135deg,#ff5c8a,#7c5cff);box-shadow:0 14px 30px rgba(0,0,0,.5)}
-.cab.jackpot{animation:glow 1s ease-in-out 4}
-@keyframes glow{50%{box-shadow:0 0 50px 8px rgba(255,210,63,.8)}}
-.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:12px;background:#0c0824}
-.reel{position:relative;height:246px;overflow:hidden;border-radius:8px;background:linear-gradient(180deg,#1a1440,#2b2364 50%,#1a1440)}
-.reel::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 22%,transparent 78%,rgba(0,0,0,.55))}
+.cab{position:relative;display:flex;gap:10px;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(160deg,var(--navy),#0a1629);border:1px solid var(--gold);box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.cab.jackpot{animation:glow 1s ease-in-out 3}
+@keyframes glow{50%{box-shadow:0 0 0 4px rgba(232,201,135,.7)}}
+.reels{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:9px;background:var(--inset);border:1px solid var(--line)}
+.reel{position:relative;height:246px;overflow:hidden;border-radius:6px;background:#17294a}
+.reel::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,20,36,.8),transparent 22%,transparent 78%,rgba(10,20,36,.8))}
 .strip{will-change:transform}
-.sym{height:82px;display:flex;align-items:center;justify-content:center;font-size:40px;border-bottom:1px solid rgba(150,120,255,.08)}
-.sym.hit{background:rgba(150,120,255,.26);box-shadow:inset 0 0 0 2px var(--gold);animation:pulse .5s infinite alternate}
-.sym.jp{background:rgba(236,217,166,.42);box-shadow:inset 0 0 0 2px #fff3c8,inset 0 0 22px rgba(255,243,200,.7)}
-@keyframes pulse{to{filter:brightness(1.3)}}
-#jp{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) scale(.9);text-align:center;font-family:var(--serif);font-size:30px;font-weight:400;letter-spacing:.06em;color:#fff3c8;text-shadow:0 0 18px #ffd23f,0 2px 6px #000;background:rgba(5,8,7,.78);padding:14px 0;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.sym{height:82px;display:flex;align-items:center;justify-content:center;font-size:40px;border-bottom:1px solid rgba(255,255,255,.06)}
+.sym.hit{background:rgba(217,179,102,.22);box-shadow:inset 0 0 0 2px var(--gold)}
+.sym.jp{background:rgba(232,201,135,.38);box-shadow:inset 0 0 0 2px #fff3c8,inset 0 0 22px rgba(255,243,200,.5)}
+#jp{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) scale(.9);text-align:center;font-size:30px;font-weight:800;color:var(--gold2);background:rgba(10,20,36,.92);border-block:1px solid var(--gold);padding:14px 0;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:2}
 #jp.show{opacity:1;transform:translateY(-50%) scale(1)}
+.lever{position:relative;width:46px;height:246px;flex:none;touch-action:none;cursor:grab}
+.lever.off{opacity:.5}
+.rail{position:absolute;left:50%;top:14px;bottom:14px;width:10px;transform:translateX(-50%);border-radius:6px;background:linear-gradient(90deg,#8a6a2f,var(--gold2),#8a6a2f)}
+.knob{position:absolute;left:50%;top:0;width:42px;height:42px;margin-left:-21px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff9a8f,#b42318 60%,#6e1209);box-shadow:0 6px 10px rgba(0,0,0,.5);transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.lever.drag .knob{transition:none}
 .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:14px 0 10px}
-.chips span{padding:4px 10px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:var(--ivory)}
-.chips i{font-style:normal;color:var(--gold);margin-left:4px;font-family:var(--serif)}
+.chips span{padding:4px 10px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:var(--ivory);background:var(--inset)}
+.chips i{font-style:normal;font-weight:700;color:var(--gold);margin-left:4px}
+
+/* 선택 라벨 공통 */
+.picks,.ladder-picks{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.picks{margin-top:14px}.ladder-picks{margin-top:10px}
+.oe{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.picks label,.oe label,.ladder-picks label{position:relative;text-align:center;border:1px solid var(--line);border-radius:7px;cursor:pointer;font-size:13px;color:var(--mute);background:var(--panel);transition:all .2s}
+.picks label{padding:11px 2px}.ladder-picks label{padding:10px 2px}
+.oe label{padding:14px;font-size:16px}
+.picks input,.oe input,.ladder-picks input{position:absolute;opacity:0;pointer-events:none}
+.picks label:has(input:checked),.oe label:has(input:checked),.ladder-picks label:has(input:checked){background:rgba(217,179,102,.16);border-color:var(--gold);color:var(--gold2);font-weight:700}
 
 /* 오리 경주 */
-.track{position:relative;height:44px;border-bottom:1px solid rgba(150,120,255,.12);transition:background .2s}
-.track.sel{background:linear-gradient(90deg,rgba(150,120,255,.14),transparent)}
+.lane{font-size:12px;color:var(--mute);margin-top:6px}
+.track{position:relative;height:44px;border-bottom:1px dashed var(--line);transition:background .2s}
+.track.sel{background:rgba(217,179,102,.12)}
 .track::after{content:"🏠";position:absolute;right:0;top:8px;font-size:22px}
 .sn{position:absolute;top:6px;font-size:28px;will-change:transform;transition:transform .05s linear}
-.lane{font-size:12px;color:var(--mute);margin-top:6px}
-.picks{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}
-.picks label,.oe label,.ladder-picks label{text-align:center;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:13px;color:var(--mute);background:rgba(255,255,255,.02);transition:all .2s}
-.picks label{padding:11px 2px}
-.picks input,.oe input,.ladder-picks input{position:absolute;opacity:0;pointer-events:none}
-.picks label:has(input:checked),.oe label:has(input:checked),.ladder-picks label:has(input:checked){border-color:var(--gold);background:rgba(150,120,255,.12);color:var(--gold)}
 
 /* 주사위 */
 .dice-box{display:flex;gap:28px;justify-content:center;align-items:center;height:110px;perspective:600px}
-.die{width:72px;height:72px;padding:10px;border-radius:16px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);place-items:center;
-background:linear-gradient(145deg,#fffaf0,#e4d9bd);box-shadow:0 14px 26px rgba(0,0,0,.55),inset 0 -4px 8px rgba(120,95,40,.28),inset 0 2px 3px #fff}
+.die{width:72px;height:72px;padding:10px;border-radius:16px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);place-items:center;background:linear-gradient(145deg,#fffaf0,#e4d9bd);box-shadow:0 10px 20px rgba(0,0,0,.5),inset 0 -4px 8px rgba(120,95,40,.28),inset 0 2px 3px #fff}
 .die i{width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3a3a,#050505);opacity:0;transition:opacity .08s}
 .die i.on{opacity:1}
 .die.one i.on{background:radial-gradient(circle at 35% 30%,#d65a5a,#7a1414);width:17px;height:17px}
 .die.rolling{animation:roll .7s ease-in-out infinite}
 @keyframes roll{0%{transform:translateY(0) rotate(0)}30%{transform:translateY(-34px) rotate(160deg)}60%{transform:translateY(0) rotate(300deg)}80%{transform:translateY(-14px) rotate(340deg)}100%{transform:translateY(0) rotate(360deg)}}
-.oe{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
-.oe label{padding:14px;font-family:var(--serif);font-size:16px}
 
+/* 카드 */
 .cards{display:flex;gap:16px;justify-content:center;margin:6px 0 16px;perspective:700px;flex-wrap:wrap}
-.pcard{width:72px;height:102px;border-radius:14px;background:#fff;color:#1d1745;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--serif);font-size:32px;line-height:1;box-shadow:0 12px 24px rgba(0,0,0,.45)}
+.pcard{width:72px;height:102px;border-radius:12px;background:#fff;color:#1d2939;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:32px;font-weight:700;line-height:1;border:1px solid var(--line);box-shadow:0 8px 18px rgba(0,0,0,.45)}
 .pcard small{font-size:20px;margin-top:4px}
-.pcard.red{color:#e8335f}
-.pcard.back{background:repeating-linear-gradient(45deg,#ff5c8a 0 8px,#7c5cff 8px 16px);color:#fff;font-size:36px}
+.pcard.red{color:#d92d4f}
+.pcard.back{background:repeating-linear-gradient(45deg,var(--navy) 0 8px,var(--navy2) 8px 16px);color:var(--gold2);font-size:36px}
 .pcard.flip{animation:flip .5s}
 @keyframes flip{from{transform:rotateY(90deg)}}
 
 /* 업다운 */
-.udbtn{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.udbtn .go{margin-top:0;padding:12px 2px;font-size:15px;line-height:1.35}
-.udbtn .eq{background:linear-gradient(135deg,#ffd23f,#ff9f1c);color:#120e2b}
-.udbtn .dn{background:linear-gradient(135deg,#3be8c0,#2f8cff)}
-.udbtn small{display:block;font-size:12px;font-family:var(--sans);opacity:.92}
+.udbtn{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.udbtn .go{margin-top:0;padding:12px 2px;line-height:1.35}
+.udbtn #up{background:#c9342a;border-color:#c9342a}
+.udbtn #eq{background:#6f7a8d;border-color:#6f7a8d}
+.udbtn #dn{background:#2b62c4;border-color:#2b62c4}
+.udbtn .go:hover:not(:disabled){background:var(--gold);border-color:var(--gold);color:#101d33}
+.udbtn small{display:block;font-size:12px;font-weight:500;opacity:.92}
 
-/* 사다리 타기 스타일 */
-.ladder-container{position:relative;width:100%;height:180px;background:#0c0824;border-radius:14px;border:1px solid var(--line);overflow:hidden;margin-bottom:12px}
-.ladder-picks{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
-.ladder-picks label{padding:10px 2px}
-
-/* 블랙잭 스타일 */
-.bj-section{background:#0c0824;border-radius:14px;border:1px solid var(--line);padding:12px;margin-bottom:12px;text-align:center}
-.bj-section h3{margin:0 0 8px;font-size:14px;color:var(--mute);font-weight:400}
-.bj-hands{display:flex;justify-content:center;gap:20px;margin-bottom:8px}
+/* 사다리 / 블랙잭 / 그래프 */
+.ladder-container,.graph-box{position:relative;width:100%;background:var(--inset);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:12px}
+.ladder-container{aspect-ratio:450/180}
+.graph-box{aspect-ratio:450/160}
+.ladder-container canvas,#graph-canvas{display:block;width:100%;height:100%}
+.graph-multiplier{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:36px;font-weight:800;color:var(--gold2)}
+.graph-multiplier.crash{color:var(--bad)}
+.bj-section{background:var(--inset);border-radius:9px;border:1px solid var(--line);padding:12px;margin-bottom:12px;text-align:center}
+.bj-section h3{margin:0 0 8px;font-size:14px;color:var(--mute);font-weight:500}
+.bj-section h3 span{color:var(--gold2);font-weight:700}
 .bj-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 .bj-controls .go{margin-top:0}
 
-/* 주식 그래프 스타일 */
-.graph-box{position:relative;width:100%;height:160px;background:#0c0824;border-radius:14px;border:1px solid var(--line);overflow:hidden;margin-bottom:12px;display:flex;align-items:center;justify-content:center}
-#graph-canvas{width:100%;height:100%;display:block}
-.graph-multiplier{position:absolute;top:14px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:38px;color:var(--gold);text-shadow:0 0 12px rgba(255,210,63,.5)}
-
-#over{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9;padding:20px;background:rgba(5,8,7,.92)}
-#over>div{max-width:320px;width:100%;padding:28px;text-align:center;border:1px solid var(--gold2);border-radius:24px;background:var(--panel)}
-#over h2{font-family:var(--serif);font-weight:400;letter-spacing:.1em;color:var(--gold);margin:0 0 10px}
+/* 파산 */
+#over{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9;padding:20px;background:rgba(4,9,18,.8)}
+#over>div{max-width:320px;width:100%;padding:28px;text-align:center;border:1px solid var(--gold);border-radius:14px;background:var(--panel)}
+#over h2{font-weight:800;color:var(--gold2);margin:0 0 10px}
 #over p{color:var(--mute);font-size:13px;line-height:1.7;margin:0}
-button,label{user-select:none;-webkit-user-select:none}
-.panel,.bal{position:relative;border-color:rgba(150,120,255,.35);box-shadow:0 18px 40px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.09)}
-.bal.up{animation:flashUp .9s}.bal.dn{animation:flashDn .6s}
-@keyframes flashUp{30%{box-shadow:0 0 0 2px var(--ok),0 0 32px rgba(59,232,192,.45)}}
-@keyframes flashDn{30%{box-shadow:0 0 0 2px var(--bad),0 0 24px rgba(255,122,156,.35)}}
-.tabs button.on{box-shadow:0 8px 20px rgba(124,92,255,.45)}
-.tabs button:not(.on):hover{background:rgba(255,255,255,.12)}
-.go{transition:transform .12s,filter .2s}.go:hover:not(:disabled){filter:brightness(1.1)}
-.keypad button,.quick button{transition:background .15s,transform .1s}
-.keypad button:active,.quick button:active{transform:scale(.95)}
-.msg{font-family:var(--serif);font-size:17px;font-weight:400}
-.msg.win,.msg.lose{animation:pop .4s}
-@keyframes pop{from{transform:scale(.85);opacity:0}}
-header{position:relative}
-#snd{position:absolute;right:0;top:8px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.07);font-size:18px;cursor:pointer}
 #err{position:fixed;left:8px;right:8px;bottom:8px;z-index:20;display:none;padding:8px 12px;border-radius:10px;background:#5a1030;color:#fff;font-size:12px;word-break:break-all}
-body{background:radial-gradient(circle at top center,rgba(196,154,80,.12),transparent 34%),var(--bg);color:var(--ivory);letter-spacing:-.02em}
-h1{position:relative;font-size:28px;font-weight:800;letter-spacing:-.05em;color:var(--navy);margin:0 0 8px;padding-bottom:14px;border-bottom:1px solid var(--gold);background:none;-webkit-background-clip:initial;background-clip:initial}
-h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3px;background:var(--gold);transform:translateX(-50%)}
-.rule{display:none}.sub{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--gold)}
-.panel,.bal{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.96);box-shadow:0 12px 35px rgba(18,35,63,.09)}
-.panel[data-title]::before{content:attr(data-title);display:block;color:var(--navy);font-size:17px;font-weight:800;letter-spacing:-.04em;margin:0 0 16px;padding-left:10px;border-left:4px solid var(--gold)}
-.bal{background:linear-gradient(135deg,var(--navy),var(--navy2));border-color:var(--navy)}
-.bal small{color:#aebbd0}.bal .big{color:var(--gold2);font-weight:800}.bal .mx{color:#fff;font-weight:700}
-.stats b{color:var(--navy);font-weight:700}
-.tabs{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;overflow:visible;padding:0}
-.tabs button{grid-column:span 2}.tabs button:first-child{grid-column:2/span 2}
-.tabs button{min-height:42px;padding:8px 2px;background:#fff;border:1px solid var(--line);border-radius:7px;color:var(--mute);font-size:13px;font-weight:700;box-shadow:none;white-space:nowrap}
-.tabs button.on{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:inset 0 -3px 0 var(--gold)}
-.tabs button:not(.on):hover{background:#faf8f3}
-.go{min-height:46px;background:var(--navy);border:1px solid var(--navy);border-radius:7px;box-shadow:0 5px 12px rgba(18,35,63,.16);font-size:15px;font-weight:700;letter-spacing:-.02em}
-.go:hover:not(:disabled){filter:none;background:var(--gold);border-color:var(--gold)}
-.go.live{background:var(--ok);border-color:var(--ok)}
-.udbtn #up{background:var(--bad);border-color:var(--bad)}.udbtn .eq{background:#8a8173;border-color:#8a8173;color:#fff}.udbtn .dn{background:#2456a6;border-color:#2456a6}
-.msg{font-weight:700}
-.led,.reels,.bj-section,.ladder-container,.graph-box{background:#faf8f3;border:1px solid #d9d1c2;border-radius:9px}
-.led b{color:var(--navy);font-weight:800}
-.keypad button{background:#fff;color:var(--navy);border-radius:7px;font-weight:700}.keypad button:active{background:#f3ead7}.keypad .clr{color:var(--bad)}
-.quick button{background:#fff;color:var(--navy);border:1px solid var(--gold);border-radius:7px;font-weight:700}
-.cab{display:flex;gap:10px;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(160deg,var(--navy2),#0a1629);border:1px solid var(--gold);box-shadow:0 8px 20px rgba(18,35,63,.25)}
-.reels{flex:1;padding:4px}
-.cab.jackpot{animation:glow 1s ease-in-out 3}
-@keyframes glow{50%{box-shadow:0 0 0 4px rgba(225,189,118,.7)}}
-.reel{background:#fff}
-.reel::after{background:linear-gradient(180deg,rgba(250,248,243,.85),transparent 22%,transparent 78%,rgba(250,248,243,.85))}
-.sym{text-shadow:none;border-bottom:1px solid #eee9de}
-.sym.hit{background:rgba(196,154,80,.16);box-shadow:inset 0 0 0 2px var(--gold);animation:none}
-.sym.jp{background:#f7e6bb;box-shadow:inset 0 0 0 2px #a97a28}
-#jp{background:rgba(255,255,255,.95);color:#8a6420;text-shadow:none;border-block:1px solid var(--gold);letter-spacing:0}
-.lever{position:relative;width:46px;height:246px;flex:none;touch-action:none;cursor:grab;user-select:none}
-.lever.off{opacity:.5}
-.rail{position:absolute;left:50%;top:14px;bottom:14px;width:10px;transform:translateX(-50%);border-radius:6px;background:linear-gradient(90deg,#8a6a2f,var(--gold2),#8a6a2f)}
-.knob{position:absolute;left:50%;top:0;width:42px;height:42px;margin-left:-21px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff9a8f,#b42318 60%,#6e1209);box-shadow:0 6px 10px rgba(0,0,0,.4);transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
-.lever.drag .knob{transition:none}
-.chips span{background:#faf8f3}.chips i{color:#8a6420}
-.track{border-bottom:1px dashed #d8d4ca}.track.sel{background:rgba(196,154,80,.12)}
-.ladder-picks label{padding:10px 2px;text-align:center;border:1px solid var(--line);border-radius:7px;cursor:pointer;font-size:13px;background:#fff;color:var(--mute)}
-.ladder-picks input{position:absolute;opacity:0;pointer-events:none}
-.picks label,.oe label{background:#fff;border-radius:7px}
-.picks label:has(input:checked),.oe label:has(input:checked),.ladder-picks label:has(input:checked){background:#f3ead7;border-color:var(--gold);color:var(--navy);font-weight:700}
-.pcard{border:1px solid var(--line);box-shadow:0 6px 14px rgba(18,35,63,.14)}
-.pcard.back{background:repeating-linear-gradient(45deg,var(--navy) 0 8px,var(--navy2) 8px 16px);color:var(--gold2)}
-.die{box-shadow:0 8px 16px rgba(18,35,63,.25),inset 0 -4px 8px rgba(120,95,40,.28),inset 0 2px 3px #fff}
-.graph-multiplier{color:var(--navy);text-shadow:none;font-weight:800}
-#snd{background:#fff;border-color:var(--line)}
-#over{background:rgba(10,22,41,.55)}#over>div{background:#fff;border-color:var(--gold);border-radius:14px}#over h2{color:var(--navy);letter-spacing:0;font-weight:800}
 .foot{text-align:center;color:var(--mute);font-size:11px;margin:4px 0 0}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -212,18 +180,17 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
   <header>
     <button id="snd" aria-label="소리 켜기/끄기">🔊</button>
     <h1>건전 카지노</h1>
-    <div class="rule"></div>
-    <div class="sub">VIRTUAL MONEY MINI GAMES</div>
+    <div class="sub">건전한 신사들의 도파민 놀이터</div>
   </header>
 
   <div class="bal">
-    <div><small>보유 자산</small><span class="big" id="bal">100,000원</span></div>
-    <div style="text-align:right"><small>최대 베팅</small><span class="mx" id="max">80,000원</span></div>
+    <div><small>보유 자산</small><span class="big" id="bal">100,000GP</span></div>
+    <div style="text-align:right"><small>최대 베팅</small><span class="mx" id="max">80,000GP</span></div>
   </div>
   <div class="stats">
     <span>전적<b id="st-record">0전 0승</b></span>
     <span>승률<b id="st-rate">0%</b></span>
-    <span>최고 자산<b id="st-high">100,000원</b></span>
+    <span>최고 자산<b id="st-high">100,000GP</b></span>
   </div>
 
   <div class="tabs">
@@ -247,7 +214,7 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
       <div class="lever" id="lever" role="button" tabindex="0" aria-label="레버 당기기"><div class="rail"></div><div class="knob" id="knob"></div></div>
       <div id="jp">잭팟 ×25</div>
     </div>
-    <div class="chips"><span>🍒<i>×1</i></span><span>🍋<i>×2</i></span><span>🔔<i>×3</i></span><span>⭐<i>×4</i></span><span>7️⃣<i>×7</i></span><span>💎<i>×10</i></span></div>
+    <div class="chips"><span>🍋<i>×0.5</i></span><span>🍒<i>×1</i></span><span>🔔<i>×3</i></span><span>⭐<i>×5</i></span><span>7️⃣<i>×7</i></span><span>💎<i>×10</i></span></div>
     <div class="pay">
       레버를 아래로 당기거나 돌리기 버튼을 누르세요<br>가로 3줄, 세로 3줄, 대각선 2줄까지 <b>총 8라인</b> 빙고<br>
       12시·3시·6시·9시 칸이 같은 문양이면 <b>잭팟 ×25</b>
@@ -260,16 +227,14 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
   <div class="panel hidden" id="race" data-title="오리 경주">
     <div id="lanes"></div>
     <div class="picks" id="picks"></div>
-    <div class="pay" style="margin-top:12px">경주 중에는 선택을 바꿀 수 없습니다. 우승하면 3.6배</div>
+    <div class="pay" style="margin-top:12px">경주 중에는 선택을 바꿀 수 없습니다. 우승하면 4배</div>
     <button class="go" id="start">출발</button>
     <div class="msg" id="m1"></div>
   </div>
 
   <!-- 3. 사다리타기 -->
   <div class="panel hidden" id="ladder" data-title="사다리타기">
-    <div class="ladder-container">
-      <canvas id="ladder-canvas" width="450" height="180" style="width:100%;height:100%"></canvas>
-    </div>
+    <div class="ladder-container"><canvas id="ladder-canvas"></canvas></div>
     <div class="pay">출발지를 고르세요. 도착한 출구가 🎁면 당첨! (출구는 도착 후 공개) 배당 3.8배</div>
     <div class="ladder-picks" id="ladder-picks">
       <label><input type="radio" name="ladder" value="0" checked>1번 출발</label>
@@ -294,16 +259,16 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
     <div class="pay">딜러보다 21에 가까우면 승리! (블랙잭 승리 시 2배, 일반 승리 1.9배)</div>
     <div class="bj-controls">
       <button class="go" id="bj-hit" disabled>카드 받기</button>
-      <button class="go eq" id="bj-stand" disabled style="color:#120e2b">멈추기</button>
+      <button class="go stand" id="bj-stand" disabled>멈추기</button>
     </div>
     <button class="go" id="bj-deal" style="margin-top:8px">카드 나눠주기</button>
     <div class="msg" id="m_bj"></div>
   </div>
 
-  <!-- 5. 주식 그래프 게임 (크래시) -->
+  <!-- 5. 주식 그래프 -->
   <div class="panel hidden" id="graph" data-title="주식그래프">
     <div class="graph-box">
-      <canvas id="graph-canvas" width="450" height="160"></canvas>
+      <canvas id="graph-canvas"></canvas>
       <div class="graph-multiplier" id="graph-mult">1.00x</div>
     </div>
     <div class="pay">그래프가 꺾이기 전에 수익 실현을 눌러보세요. 배율은 계속 올라가요.</div>
@@ -327,14 +292,14 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
   <div class="panel hidden" id="ud" data-title="업다운">
     <div class="cards"><div class="pcard" id="c0"></div><div class="pcard back" id="c1">?</div></div>
     <div class="pay">다음 카드가 지금 카드보다 높을지, 낮을지, 같을지 맞혀보세요<br>A는 1, K는 13이고 확률에 따라 배당이 바뀝니다</div>
-    <div class="udbtn" style="margin-top:14px"><button class="go" id="up"></button><button class="go eq" id="eq"></button><button class="go dn" id="dn"></button></div>
+    <div class="udbtn"><button class="go" id="up"></button><button class="go" id="eq"></button><button class="go" id="dn"></button></div>
     <div class="msg" id="m3"></div>
   </div>
 
-  <!-- 베팅 콘솔 패널 -->
+  <!-- 베팅 콘솔 -->
   <div class="panel" data-title="베팅 금액">
     <div class="bet">
-      <div class="led"><span>베팅 금액</span><b id="bet-led">1,000원</b></div>
+      <div class="led"><span>베팅 금액</span><b id="bet-led">1,000GP</b></div>
       <div class="keypad" id="keypad">
         <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
         <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
@@ -344,7 +309,7 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
       <div class="quick">
         <button data-p="min">최소</button><button data-p="0.25">1/4</button>
         <button data-p="0.5">1/2</button><button data-p="1.0">최대</button>
-        <p>최소 1,000원<br>최대 <span id="max-limit-txt">80,000</span>원</p>
+        <p>최소 1,000GP<br>최대 <span id="max-limit-txt">80,000</span>GP</p>
       </div>
     </div>
   </div>
@@ -354,42 +319,44 @@ h1::after{content:"";position:absolute;left:50%;bottom:-2px;width:54px;height:3p
 <div id="err"></div>
 <div id="over"><div>
   <h2>파산</h2>
-  <p>가상 자산을 모두 사용했습니다.<br>100,000원으로 다시 시작할 수 있습니다.</p>
-  <button class="go" id="reset" style="letter-spacing:.05em;font-size:15px">다시 시작</button>
+  <p>옥수수밭으로 끌려가게 되었습니다..<br>재도전하시겠습니까?</p>
+  <button class="go" id="reset" style="font-size:15px">다시 시작</button>
 </div></div>
 
 <script>
 const $=id=>document.getElementById(id);
-window.addEventListener('error',e=>{const b=document.getElementById('err');if(b){b.style.display='block';b.textContent='오류: '+e.message+' (줄 '+e.lineno+')'}});
-const won=n=>n.toLocaleString('ko-KR')+'원';
-let balance=100000,maxBalance=100000,totalGames=0,winGames=0,busy=false,bet0=1000;
-let prevGrid=null;let isNewInput=true;
+window.addEventListener('error',e=>{const b=$('err');if(b){b.style.display='block';b.textContent='오류: '+e.message+' (줄 '+e.lineno+')'}});
+const round2=n=>Math.round(n);
+const cut2=n=>Math.floor(n+1e-6);                   // 지급액은 1GP 단위 내림
+const won=n=>n.toLocaleString('en-US')+'GP';
+const START=100000,STORE='gunjeon-casino-gp-v1';
+let soundOn=true;
+let balance=START,maxBalance=START,totalGames=0,winGames=0,busy=false,bet0=1000;
+let prevGrid=null,isNewInput=true;
+
+/* 저장 / 불러오기 */
+try{
+  const s=JSON.parse(localStorage.getItem(STORE)||'null');
+  if(s&&Number.isFinite(s.balance)){soundOn=s.soundOn!==false;balance=s.balance;maxBalance=Math.max(s.maxBalance||balance,balance);totalGames=s.totalGames|0;winGames=s.winGames|0}
+}catch(e){}
+function save(){try{localStorage.setItem(STORE,JSON.stringify({balance,maxBalance,totalGames,winGames,soundOn}))}catch(e){}}
+
 const maxBet=()=>balance>=1000?Math.max(1000,Math.floor(balance*0.8)):0;
 
 function updateBetLed(){
-  const m=maxBet(); if(bet0>m)bet0=m;
+  const m=maxBet();if(bet0>m)bet0=m;
   $('bet-led').textContent=won(bet0);
-  $('max-limit-txt').textContent=m.toLocaleString('ko-KR');$('max').textContent=won(m);
+  $('max-limit-txt').textContent=m.toLocaleString('en-US');$('max').textContent=won(m);
 }
 document.querySelectorAll('.keypad button').forEach(b=>b.onclick=()=>{
   if(busy)return;
-  const k=b.dataset.k;
-  const m=maxBet();
-  if(k==='c'){
-    bet0=0;
-    isNewInput=true;
-  }else{
+  const k=b.dataset.k,m=maxBet();
+  if(k==='c'){bet0=0;isNewInput=true}
+  else{
     let v;
-    if(k==='000'){
-      v=parseInt((bet0?String(bet0):'')+k,10)||0;
-    }else{
-      if(isNewInput){
-        v=parseInt(k,10)||0;
-        isNewInput=false;
-      }else{
-        v=parseInt(String(bet0)+k,10)||0;
-      }
-    }
+    if(k==='000')v=parseInt((bet0?String(bet0):'')+k,10)||0;
+    else if(isNewInput){v=parseInt(k,10)||0;isNewInput=false}
+    else v=parseInt(String(bet0)+k,10)||0;
     bet0=Math.min(v,m);
   }
   updateBetLed();
@@ -399,21 +366,20 @@ document.querySelectorAll('.quick button').forEach(b=>b.onclick=()=>{
   const p=b.dataset.p,m=maxBet();
   if(p==='min')bet0=Math.min(1000,m);
   else if(p==='1.0')bet0=m;
-  else bet0=Math.max(1000,Math.floor(balance*parseFloat(p)));
-  isNewInput=true;
-  updateBetLed();
+  else bet0=Math.min(m,Math.max(1000,Math.floor(balance*parseFloat(p)/1000)*1000));
+  isNewInput=true;updateBetLed();
 });
 function getValidBet(el){
-  const m=maxBet();
-  if(!bet0||bet0<1000){el.className='msg lose';el.textContent='최소 베팅 금액은 1,000원입니다.';isNewInput=true;return null}
-  if(bet0>m){el.className='msg lose';el.textContent='최대 '+won(m)+'까지 베팅할 수 있습니다.';isNewInput=true;return null}
-  isNewInput=true;
+  const m=maxBet();isNewInput=true;
+  if(!bet0||bet0<1000){el.className='msg lose';el.textContent='최소 베팅 금액은 1,000GP입니다.';return null}
+  if(bet0>m){el.className='msg lose';el.textContent='최대 '+won(m)+'까지 베팅할 수 있습니다.';return null}
   return bet0;
 }
 
+/* 사운드 */
 const AC=window.AudioContext||window.webkitAudioContext;
+let audioCtx=null,musicTimer=null,mstep=0;
 function tone(...a){try{_tone(...a)}catch(e){}}
-let audioCtx=null,soundOn=true,musicTimer=null,mstep=0;
 function _tone(f,t,d,type,v){
   const o=audioCtx.createOscillator(),g=audioCtx.createGain();
   o.type=type||'triangle';o.connect(g);g.connect(audioCtx.destination);
@@ -421,12 +387,15 @@ function _tone(f,t,d,type,v){
   o.frequency.setValueAtTime(f,s);g.gain.setValueAtTime(v||.08,s);g.gain.linearRampToValueAtTime(.005,s+d);
   o.start(s);o.stop(s+d);
 }
+function ensureAudio(){
+  if(!audioCtx&&AC)audioCtx=new AC();
+  if(!audioCtx)return false;
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  return true;
+}
 function playSound(type){try{_playSound(type)}catch(e){}}
 function _playSound(type){
-  if(!soundOn)return;
-  if(!audioCtx&&AC)audioCtx=new AC();
-  if(!audioCtx)return;
-  if(audioCtx.state==='suspended')audioCtx.resume();
+  if(!soundOn||!ensureAudio())return;
   if(type==='lever'){tone(120,0,.12,'square',.07);tone(80,.1,.15,'sine',.08)}
   else if(type==='click')tone(660,0,.05,'sine',.05);
   else if(type==='press'){tone(440,0,.07,'triangle',.07);tone(880,.05,.1,'triangle',.06)}
@@ -435,13 +404,6 @@ function _playSound(type){
   else if(type==='jackpot'){[523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*.12,.3,'triangle',.1))}
   else if(type==='lose'){tone(180,0,.15,'sawtooth',.05);tone(110,.15,.2,'sawtooth',.05)}
 }
-
-let shown=100000;
-function tweenBal(){
-  const from=shown,to=balance,t0=performance.now(),el=$('bal');
-  (function step(t){const k=Math.min(1,(t-t0)/500);shown=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));el.textContent=won(shown);if(k<1)requestAnimationFrame(step)})(t0);
-}
-
 const TUNES={
   slot:{ms:125,wave:'triangle',mel:[523,659,784,988,784,659,880,1047,988,784,659,784,880,784,659,523],bass:[131,131,175,196]},
   race:{ms:95,wave:'square',vol:.022,mel:[392,392,523,392,440,440,587,440,494,494,659,494,523,659,784,659],bass:[98,98,110,131]},
@@ -453,10 +415,7 @@ const TUNES={
 };
 function startMusic(k){try{_startMusic(k)}catch(e){}}
 function _startMusic(k){
-  stopMusic();if(!soundOn)return;
-  if(!audioCtx&&AC)audioCtx=new AC();
-  if(!audioCtx)return;
-  if(audioCtx.state==='suspended')audioCtx.resume();
+  stopMusic();if(!soundOn||!ensureAudio())return;
   const T=TUNES[k];if(!T)return;mstep=0;
   const tick=()=>{
     const i=mstep%16,d=T.ms/1000;
@@ -469,7 +428,8 @@ function _startMusic(k){
 }
 function stopMusic(){clearInterval(musicTimer);musicTimer=null}
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopMusic()});
-$('snd').onclick=()=>{soundOn=!soundOn;$('snd').textContent=soundOn?'🔊':'🔇';if(!soundOn)stopMusic();else playSound('click')};
+$('snd').textContent=soundOn?'🔊':'🔇';
+$('snd').onclick=()=>{soundOn=!soundOn;save();$('snd').textContent=soundOn?'🔊':'🔇';if(!soundOn)stopMusic();else playSound('click')};
 document.addEventListener('click',e=>{
   if(e.target.tagName==='INPUT'||e.target.id==='snd')return;
   const b=e.target.closest('button,label');
@@ -478,6 +438,18 @@ document.addEventListener('click',e=>{
   playSound(b.classList.contains('go')?'press':'click');
 });
 
+/* 자산 표시 */
+let shown=balance,tweenId=0;
+function tweenBal(){
+  const from=shown,to=balance,t0=performance.now(),el=$('bal'),id=++tweenId;
+  (function step(t){
+    if(id!==tweenId)return;
+    const k=Math.min(1,(t-t0)/500);
+    shown=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));
+    el.textContent=won(shown);
+    if(k<1)requestAnimationFrame(step);
+  })(t0);
+}
 function refresh(){
   tweenBal();
   if(balance>maxBalance)maxBalance=balance;
@@ -486,22 +458,26 @@ function refresh(){
   $('st-rate').textContent=totalGames?Math.round(winGames/totalGames*100)+'%':'0%';
   $('st-high').textContent=won(maxBalance);
   if(balance<1000)$('over').style.display='flex';
+  save();
 }
-let bw=null,liveIds=[];
+
+/* 진행 상태 */
+let liveIds=[],busyEls=null;
 function setBusy(v){
-  busy=v;clearTimeout(bw);
-  if(v)bw=setTimeout(()=>{if(busy&&!liveIds.length){stopMusic();setBusy(false);refresh()}},15000);
-  document.querySelectorAll('.go,.tabs button,.keypad button,.quick button,input[name=sn],input[name=oe],input[name=ladder]').forEach(e=>e.disabled=v);
+  busy=v;
+  if(!busyEls)busyEls=[...document.querySelectorAll('.go,.tabs button,.keypad button,.quick button,input[name=sn],input[name=oe],input[name=ladder]')];
+  busyEls.forEach(e=>e.disabled=v);
   $('lever').classList.toggle('off',v);
   if(v)liveIds.forEach(id=>$(id).disabled=false);
   else{$('bj-hit').disabled=true;$('bj-stand').disabled=true}
 }
 function settle(bet,payout,el,label){
-  totalGames++;balance+=payout-bet;
-  const bc=document.querySelector('.bal');bc.classList.remove('up','dn');void bc.offsetWidth;if(payout!==bet)bc.classList.add(payout>bet?'up':'dn');
-  if(payout>bet){winGames++;el.className='msg win';el.textContent=label+'  +'+won(payout-bet)}
+  payout=cut2(payout);totalGames++;balance=round2(balance+payout-bet);
+  const bc=document.querySelector('.bal');bc.classList.remove('up','dn');void bc.offsetWidth;
+  if(payout!==bet)bc.classList.add(payout>bet?'up':'dn');
+  if(payout>bet){winGames++;el.className='msg win';el.textContent=label+'  +'+won(round2(payout-bet))}
   else if(payout===bet){el.className='msg';el.textContent=label+'  본전'}
-  else{el.className='msg lose';el.textContent=label+'  -'+won(bet)}
+  else{el.className='msg lose';el.textContent=label+'  -'+won(round2(bet-payout))}
   setBusy(false);refresh();
 }
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
@@ -510,16 +486,26 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
   ['slot','race','ladder','bj','graph','oe','ud'].forEach(t=>$(t).classList.toggle('hidden',t!==b.dataset.t));
 });
 
+/* 캔버스 선명하게 (고해상도 화면 대응) */
+function hiDpi(cv,w,h){
+  const r=Math.min(window.devicePixelRatio||1,3);
+  cv.width=w*r;cv.height=h*r;
+  const c=cv.getContext('2d');c.setTransform(r,0,0,r,0,0);
+  return c;
+}
+
 /* ===== 1. 슬롯머신 ===== */
-const SYM=[['🍒',1],['🍋',2],['🔔',3],['⭐',4],['7️⃣',7],['💎',10]];
+// [문양, 배당, 출현 가중치(합 1000)] — 다이아 3.5%, 기대 환수율 약 95%
+const SYM=[['🍋',0.5,210],['🍒',1,220],['🔔',3,220],['⭐',5,170],['7️⃣',7,145],['💎',10,35]];
+const SYM_TOTAL=SYM.reduce((a,s)=>a+s[2],0);
+const rs=()=>{let r=Math.random()*SYM_TOTAL;for(let i=0;i<SYM.length;i++){r-=SYM[i][2];if(r<0)return i}return 0};
 const ROWH=82,STOP=30;
 function initReels(){
   for(let c=0;c<3;c++){
     const col=$('col'+c);col.innerHTML='';
     for(let j=0;j<40;j++){
       const d=document.createElement('div');d.className='sym';
-      d.textContent=SYM[Math.floor(Math.random()*SYM.length)][0];
-      col.appendChild(d);
+      d.textContent=SYM[rs()][0];col.appendChild(d);
     }
   }
 }
@@ -532,24 +518,23 @@ const LINES=[
 const JACKPOT=[[1,0],[2,1],[1,2],[0,1]];
 const JP_MULT=25;
 
+const styleFx=document.createElement('style');
+styleFx.textContent='@keyframes fx{to{transform:translate(var(--dx),calc(var(--dy) + 240px)) rotate(240deg);opacity:0}}';
+document.head.appendChild(styleFx);
 function burst(){
   const cab=$('cab');
   for(let i=0;i<26;i++){
-    const e=document.createElement('span');e.className='fx';e.textContent=['✨','⭐','💛','💎'][i%4];
+    const e=document.createElement('span');e.textContent=['✨','⭐','💛','💎'][i%4];
     e.style.cssText=`position:absolute;left:50%;top:50%;z-index:3;font-size:20px;pointer-events:none;animation:fx 1.5s ease-out forwards;--dx:${(Math.random()-.5)*320}px;--dy:${-60-Math.random()*180}px;animation-delay:${Math.random()*.25}s`;
     cab.appendChild(e);setTimeout(()=>e.remove(),1800);
   }
 }
-const styleFx=document.createElement('style');
-styleFx.innerHTML=`@keyframes fx{to{transform:translate(var(--dx),calc(var(--dy) + 240px)) rotate(240deg);opacity:0}}`;
-document.head.appendChild(styleFx);
-
 function runSlotSpin(bet){
   const m=$('m0');setBusy(true);
   m.textContent='릴이 돌아가는 중입니다…';m.className='msg';startMusic('slot');
   $('jp').classList.remove('show');$('cab').classList.remove('jackpot');
   document.querySelectorAll('.sym').forEach(e=>e.classList.remove('hit','jp'));
-  const grid=[0,1,2].map(()=>[0,1,2].map(()=>Math.floor(Math.random()*SYM.length)));
+  const grid=[0,1,2].map(()=>[0,1,2].map(rs));
   const old=prevGrid;prevGrid=grid;
   for(let c=0;c<3;c++){
     const col=$('col'+c),kids=col.children;
@@ -591,14 +576,15 @@ $('spin').onclick=trySpin;
 (function(){
   const lv=$('lever'),kn=$('knob'),MAX=190;let y0=null,dy=0,moved=false;
   const set=v=>kn.style.transform=`translateY(${v}px)`;
+  const pull=()=>{set(MAX);setTimeout(()=>set(0),220);playSound('lever');trySpin()};
   lv.addEventListener('pointerdown',e=>{if(busy)return;y0=e.clientY;dy=0;moved=false;lv.classList.add('drag');try{lv.setPointerCapture(e.pointerId)}catch(_){}});
   lv.addEventListener('pointermove',e=>{if(y0===null)return;dy=Math.max(0,Math.min(MAX,e.clientY-y0));if(dy>6)moved=true;set(dy)});
   lv.addEventListener('pointerup',()=>{
     if(y0===null)return;y0=null;lv.classList.remove('drag');
-    if((!moved||dy>MAX*.5)&&!busy){set(MAX);setTimeout(()=>set(0),220);playSound('lever');trySpin()}else set(0);
+    if((!moved||dy>MAX*.5)&&!busy)pull();else set(0);
   });
   lv.addEventListener('pointercancel',()=>{y0=null;lv.classList.remove('drag');set(0)});
-  lv.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!busy){e.preventDefault();set(MAX);setTimeout(()=>set(0),220);playSound('lever');trySpin()}});
+  lv.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!busy){e.preventDefault();pull()}});
 })();
 
 /* ===== 2. 오리 경주 ===== */
@@ -608,77 +594,116 @@ $('lanes').innerHTML=NAMES.map((n,i)=>`<div class="lane">${i+1}번 ${n}</div><di
 $('picks').innerHTML=NAMES.map((n,i)=>`<label><input type="radio" name="sn" value="${i}" ${i?'':'checked'}>${i+1}번 ${n}</label>`).join('');
 function hl(){const s=document.querySelector('input[name=sn]:checked').value;for(let i=0;i<4;i++)$('track-'+i).classList.toggle('sel',i==s)}
 document.querySelectorAll('input[name=sn]').forEach(r=>r.onchange=hl);hl();
+const crown=(i,on)=>{const c=$('s'+i).querySelector('.crown');if(c)c.style.display=on?'block':'none'};
 
 $('start').onclick=()=>{
   const m=$('m1'),bet=getValidBet(m);if(!bet)return;
   const pick=+document.querySelector('input[name=sn]:checked').value;
-  setBusy(true);m.textContent='';m.className='msg';pos=[0,0,0,0];const TW=$('track-0').clientWidth-44;startMusic('race');
-  for(let i=0;i<4;i++){const c=$('s'+i).querySelector('.crown');if(c)c.style.display='none';}
+  setBusy(true);m.textContent='';m.className='msg';pos=[0,0,0,0];
+  const TW=$('track-0').clientWidth-44;startMusic('race');
+  for(let i=0;i<4;i++){crown(i,false);$('s'+i).style.transform='translateX(0)'}
   const spd=[0,0,0,0].map(()=>1.0+Math.random()*0.5);
-  const iv=setInterval(()=>{
+  let last=performance.now(),acc=0;
+  const stepOnce=()=>{
     for(let i=0;i<4;i++){
       spd[i]+=(Math.random()-0.5)*0.3;spd[i]=Math.max(0.7,Math.min(1.9,spd[i]));
       pos[i]+=spd[i]*(0.8+Math.random()*0.4);
-      const p=Math.min(pos[i],100);
-      $('s'+i).style.transform=`translateX(${p/100*TW}px)`;
     }
+  };
+  (function frame(now){
+    acc+=Math.min(200,now-last);last=now;       // 탭이 멈췄다 돌아와도 한 번에 튀지 않게
+    while(acc>=50&&Math.max(...pos)<100){stepOnce();acc-=50}
+    for(let i=0;i<4;i++)$('s'+i).style.transform=`translateX(${Math.min(pos[i],100)/100*TW}px)`;
     const maxP=Math.max(...pos);
-    for(let i=0;i<4;i++){const c=$('s'+i).querySelector('.crown');if(c)c.style.display=(maxP>0&&pos[i]===maxP)?'block':'none';}
-    if(maxP>=100){
-      clearInterval(iv);stopMusic();
-      const w=pos.indexOf(maxP);
-      for(let i=0;i<4;i++){const c=$('s'+i).querySelector('.crown');if(c)c.style.display=(i===w)?'block':'none';}
-      if(w===pick)playSound('win');else playSound('lose');
-      settle(bet,w===pick?Math.floor(bet*3.6):0,m,`${w+1}번 ${NAMES[w]} 우승`);
-    }
-  },50);
+    for(let i=0;i<4;i++)crown(i,maxP>0&&pos[i]===maxP);
+    if(maxP<100){requestAnimationFrame(frame);return}
+    stopMusic();
+    const w=pos.indexOf(maxP);
+    for(let i=0;i<4;i++)crown(i,i===w);
+    playSound(w===pick?'win':'lose');
+    settle(bet,w===pick?bet*4:0,m,`${w+1}번 ${NAMES[w]} 우승`);
+  })(last);
 };
 
 /* ===== 3. 사다리타기 ===== */
 let winExit=0,showWin=false;
 const LX=i=>50+i*110;
-function drawLadder(rungs,path,total,t){
-  const x=$('ladder-canvas').getContext('2d');
-  x.clearRect(0,0,450,180);x.lineCap='round';x.lineJoin='round';
-  x.strokeStyle='#cfc9ba';x.lineWidth=4;
-  for(let i=0;i<4;i++){x.beginPath();x.moveTo(LX(i),24);x.lineTo(LX(i),140);x.stroke()}
-  (rungs||[]).forEach(([lv,c])=>{x.beginPath();x.moveTo(LX(c),lv);x.lineTo(LX(c+1),lv);x.stroke()});
-  x.textAlign='center';x.font='bold 15px sans-serif';
-  for(let i=0;i<4;i++){x.fillStyle='#667085';x.fillText((i+1)+'번',LX(i),15);x.fillText(showWin?(i===winExit?'🎁':'꽝'):'?',LX(i),166)}
-  if(path&&t>0){
-    x.strokeStyle='#c49a50';x.lineWidth=6;x.beginPath();x.moveTo(path[0][0],path[0][1]);
-    let left=t*total;
-    for(let k=1;k<path.length;k++){
-      const [ax,ay]=path[k-1],[bx,by]=path[k],L=Math.hypot(bx-ax,by-ay);
-      if(left>=L){x.lineTo(bx,by);left-=L}else{x.lineTo(ax+(bx-ax)*left/L,ay+(by-ay)*left/L);break}
-    }
-    x.stroke();
-  }
+const LEVELS=[38,52,66,80,94,108,122];          // 가로줄이 놓일 수 있는 높이
+const lctx=hiDpi($('ladder-canvas'),450,180);
+// 가로줄 생성: 같은 높이에서 이웃한 줄은 붙지 않고, 칸마다 최소 2개는 반드시 있게 함
+function makeRungs(){
+  let rungs;
+  do{
+    rungs=[];
+    LEVELS.forEach(lv=>{let prev=-2;for(let c=0;c<3;c++){if(c-prev>1&&Math.random()<.5){rungs.push([lv,c]);prev=c}}});
+  }while([0,1,2].some(c=>rungs.filter(r=>r[1]===c).length<2));
+  return rungs;
 }
-drawLadder();
-$('ladder-start').onclick=()=>{
-  const m=$('m_ladder'),bet=getValidBet(m);if(!bet)return;
-  const sc=+document.querySelector('input[name=ladder]:checked').value;
-  winExit=Math.floor(Math.random()*4);showWin=false;
-  setBusy(true);m.textContent='';m.className='msg';startMusic('ladder');
-  const levels=[44,66,88,110,130],rungs=[];
-  levels.forEach(lv=>{let prev=-2;for(let c=0;c<3;c++){if(c-prev>1&&Math.random()<.5){rungs.push([lv,c]);prev=c}}});
-  let col=sc;const path=[[LX(col),24]];
-  levels.forEach(lv=>{
+// 시작 줄에서 위→아래로 따라 내려가며 꺾이는 점을 모두 기록
+function tracePath(rungs,start){
+  let col=start;const path=[[LX(col),24]];
+  LEVELS.forEach(lv=>{
     const r=rungs.find(([l,c])=>l===lv&&(c===col||c+1===col));
     if(r){path.push([LX(col),lv]);col=(r[1]===col)?col+1:col-1;path.push([LX(col),lv])}
   });
   path.push([LX(col),140]);
+  return {path,col};
+}
+function drawLadder(rungs,path,total,t){
+  const x=lctx;
+  x.clearRect(0,0,450,180);x.lineCap='round';x.lineJoin='round';
+  // 세로줄
+  x.strokeStyle='#4a6288';x.lineWidth=4;
+  for(let i=0;i<4;i++){x.beginPath();x.moveTo(LX(i),24);x.lineTo(LX(i),140);x.stroke()}
+  // 가로줄 (양 끝에 연결점을 찍어 이어진 곳이 분명히 보이게)
+  (rungs||[]).forEach(([lv,c])=>{
+    x.strokeStyle='#4a6288';x.lineWidth=4;
+    x.beginPath();x.moveTo(LX(c),lv);x.lineTo(LX(c+1),lv);x.stroke();
+    x.fillStyle='#6f87ad';
+    [c,c+1].forEach(k=>{x.beginPath();x.arc(LX(k),lv,3.5,0,Math.PI*2);x.fill()});
+  });
+  x.textAlign='center';x.font='bold 15px sans-serif';x.fillStyle='#93a1b8';
+  for(let i=0;i<4;i++){x.fillText((i+1)+'번',LX(i),15);x.fillText(showWin?(i===winExit?'🎁':'꽝'):'?',LX(i),166)}
+  // 지나간 길
+  if(path&&t>0){
+    x.strokeStyle='#d9b366';x.lineWidth=5;x.shadowColor='rgba(217,179,102,.55)';x.shadowBlur=8;
+    x.beginPath();x.moveTo(path[0][0],path[0][1]);
+    let left=t*total,tip=path[0];
+    for(let k=1;k<path.length;k++){
+      const [ax,ay]=path[k-1],[bx,by]=path[k],L=Math.hypot(bx-ax,by-ay);
+      if(left>=L){x.lineTo(bx,by);left-=L;tip=[bx,by]}
+      else{tip=[ax+(bx-ax)*left/L,ay+(by-ay)*left/L];x.lineTo(tip[0],tip[1]);break}
+    }
+    x.stroke();x.shadowBlur=0;
+    x.fillStyle='#fff3c8';x.beginPath();x.arc(tip[0],tip[1],5,0,Math.PI*2);x.fill();
+  }
+}
+drawLadder();            // 처음엔 세로줄만 보임
+let ladderReset=null;
+$('ladder-start').onclick=()=>{
+  const m=$('m_ladder'),bet=getValidBet(m);if(!bet)return;
+  const sc=+document.querySelector('input[name=ladder]:checked').value;
+  clearTimeout(ladderReset);
+  winExit=Math.floor(Math.random()*4);showWin=false;
+  setBusy(true);m.textContent='';m.className='msg';startMusic('ladder');
+  const rungs=makeRungs(),{path,col}=tracePath(rungs,sc);
   let total=0;for(let k=1;k<path.length;k++)total+=Math.hypot(path[k][0]-path[k-1][0],path[k][1]-path[k-1][1]);
-  const t0=performance.now();
+  // 1단계: 가로줄을 위에서부터 하나씩 긋기 / 2단계: 선택한 길 따라가기
+  const sorted=[...rungs].sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+  const DRAW=Math.min(1200,sorted.length*90),RUN=1400+total*5,t0=performance.now();
   (function step(now){
-    const t=Math.min(1,(now-t0)/2200);drawLadder(rungs,path,total,t);
+    const el=now-t0;
+    if(el<DRAW){
+      drawLadder(sorted.slice(0,Math.ceil(el/DRAW*sorted.length)));
+      requestAnimationFrame(step);return;
+    }
+    const t=Math.min(1,(el-DRAW)/RUN);drawLadder(rungs,path,total,t);
     if(t<1){requestAnimationFrame(step);return}
     stopMusic();
     const win=col===winExit;showWin=true;drawLadder(rungs,path,total,1);
     playSound(win?'win':'lose');
-    settle(bet,win?Math.floor(bet*3.8):0,m,`${sc+1}번 → ${col+1}번 출구 (${win?'당첨':'꽝'})`);
-    setTimeout(()=>{showWin=false;drawLadder()},2000);
+    settle(bet,win?bet*3.8:0,m,`${sc+1}번 → ${col+1}번 출구 (${win?'당첨':'꽝'})`);
+    // 결과는 다음 판 시작 전까지 그대로 보여 줌
   })(t0);
 };
 
@@ -688,23 +713,22 @@ let deck=[],dealerHand=[],playerHand=[],bjBet=0;
 
 function createDeck(){
   deck=[];
-  for(let r=1;r<=13;r++) for(let s of SU) deck.push({r,s});
-  deck.sort(()=>Math.random()-.5);
+  for(let r=1;r<=13;r++)for(const s of SU)deck.push({r,s});
+  for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]]}
 }
 function cardVal(hand){
   let sum=0,aces=0;
   hand.forEach(c=>{if(c.r===1){aces++;sum+=11}else sum+=(c.r>10?10:c.r)});
-  while(sum>21&&aces>0){sum-=10;aces--;}
+  while(sum>21&&aces>0){sum-=10;aces--}
   return sum;
 }
 function renderBJCards(hand,elId,hideFirst=false){
   const el=$(elId);el.innerHTML='';
   hand.forEach((c,i)=>{
     const d=document.createElement('div');
-    if(hideFirst&&i===0){
-      d.className='pcard back';d.textContent='?';
-    }else{
-      d.className='pcard'+(c.s==='♥'||c.s==='♦'?' red':'' );
+    if(hideFirst&&i===0){d.className='pcard back';d.textContent='?'}
+    else{
+      d.className='pcard'+(c.s==='♥'||c.s==='♦'?' red':'');
       d.innerHTML=RK[c.r-1]+'<small>'+c.s+'</small>';
     }
     el.appendChild(d);
@@ -718,13 +742,8 @@ $('bj-deal').onclick=()=>{
   playerHand=[deck.pop(),deck.pop()];
   renderBJCards(dealerHand,'dealer-cards',true);
   renderBJCards(playerHand,'player-cards');
-  $('dealer-score').textContent='?';
-  $('player-score').textContent=cardVal(playerHand);
-  
-  // 플레이어 블랙잭 즉시 확인
-  if(cardVal(playerHand)===21){
-    endBJ('blackjack');
-  }
+  $('dealer-score').textContent='?';$('player-score').textContent=cardVal(playerHand);
+  if(cardVal(playerHand)===21)endBJ('blackjack');
 };
 $('bj-hit').onclick=()=>{
   if(!liveIds.length)return;
@@ -732,29 +751,23 @@ $('bj-hit').onclick=()=>{
   renderBJCards(playerHand,'player-cards');
   const sc=cardVal(playerHand);
   $('player-score').textContent=sc;
-  if(sc>21){endBJ('bust');}
+  if(sc>21)endBJ('bust');
+  else if(sc===21)endBJ('stand');
 };
-$('bj-stand').onclick=()=>{
-  if(!liveIds.length)return;
-  endBJ('stand');
-};
+$('bj-stand').onclick=()=>{if(liveIds.length)endBJ('stand')};
 
 function endBJ(type){
   liveIds=[];setBusy(true);
   renderBJCards(dealerHand,'dealer-cards',false);
   let dsc=cardVal(dealerHand);
   $('dealer-score').textContent=dsc;
-  
-  const psc=cardVal(playerHand);
+  const psc=cardVal(playerHand),bet=bjBet,m=$('m_bj');
   let payout=0,msg='';
-  const bet=bjBet;
-  
-  if(type==='bust'){
-    msg='버스트! 패배';payout=0;playSound('lose');
-  }else if(type==='blackjack'){
-    if(dsc===21){msg='둘 다 블랙잭! 무승부';payout=bet}else{msg='블랙잭! 승리 (2배)';payout=bet*2;playSound('win')}
+  if(type==='bust'){msg='버스트! 패배';playSound('lose')}
+  else if(type==='blackjack'){
+    if(dsc===21){msg='둘 다 블랙잭! 무승부';payout=bet}
+    else{msg='블랙잭! 승리 (2배)';payout=bet*2;playSound('win')}
   }else{
-    // 딜러 드로우 (17 미만이면 계속 뽑기)
     const iv=setInterval(()=>{
       if(dsc<17){
         dealerHand.push(deck.pop());
@@ -763,63 +776,71 @@ function endBJ(type){
         $('dealer-score').textContent=dsc;
       }else{
         clearInterval(iv);stopMusic();
-        if(dsc>21||psc>dsc){
-          msg='플레이어 승리!';payout=Math.floor(bet*1.9);playSound('win');
-        }else if(psc===dsc){
-          msg='무승부 (본전 반환)';payout=bet;playSound('click');
-        }else{
-          msg='딜러 승리!';payout=0;playSound('lose');
-        }
-        settle(bet,payout,$('m_bj'),msg);
+        if(dsc>21||psc>dsc){msg='플레이어 승리!';payout=bet*1.9;playSound('win')}
+        else if(psc===dsc){msg='무승부 (본전 반환)';payout=bet;playSound('click')}
+        else{msg='딜러 승리!';playSound('lose')}
+        settle(bet,payout,m,msg);
       }
     },400);
     return;
   }
-  stopMusic();settle(bet,payout,$('m_bj'),msg);
+  stopMusic();settle(bet,payout,m,msg);
 }
-
 function showBJBacks(){
   ['dealer-cards','player-cards'].forEach(id=>{$(id).innerHTML='<div class="pcard back">?</div><div class="pcard back">?</div>'});
   $('dealer-score').textContent='?';$('player-score').textContent='?';
 }
 showBJBacks();
+
 /* ===== 5. 주식 그래프 ===== */
-let graphTimer=null,currentMult=1,graphRunning=false,graphBet=0,gpts=[1];
-const cvs=$('graph-canvas'),ctx=cvs.getContext('2d');
+let graphRaf=0,currentMult=1,graphRunning=false,graphBet=0,gpts=[{t:0,v:1}],gStart=0,gElapsed=0;
+const ctx=hiDpi($('graph-canvas'),450,160);
+const multAt=ms=>Math.pow(1.02,ms/70);         // 70ms마다 2% 상승
 function drawGraph(crashed){
   ctx.clearRect(0,0,450,160);
   const top=Math.max(2,currentMult*1.15),yy=v=>150-(Math.log(v)/Math.log(top))*130;
-  ctx.strokeStyle='#e2ded5';ctx.lineWidth=1;
+  ctx.strokeStyle='#24344f';ctx.lineWidth=1;
   [1,2,5,10,20].forEach(v=>{if(v<top){ctx.beginPath();ctx.moveTo(0,yy(v));ctx.lineTo(450,yy(v));ctx.stroke()}});
-  ctx.strokeStyle=crashed?'#b42318':'#1f7a5a';ctx.lineWidth=4;ctx.lineJoin='round';ctx.beginPath();
-  gpts.forEach((v,i)=>{const x=10+i/Math.max(gpts.length-1,60)*430;i?ctx.lineTo(x,yy(v)):ctx.moveTo(x,yy(v))});
+  const span=Math.max(gElapsed,60*70);
+  ctx.strokeStyle=crashed?'#ff6b5e':'#3ecf9c';ctx.lineWidth=4;ctx.lineJoin='round';ctx.beginPath();
+  gpts.forEach((p,i)=>{const x=10+p.t/span*430;i?ctx.lineTo(x,yy(p.v)):ctx.moveTo(x,yy(p.v))});
   ctx.stroke();
 }
 drawGraph();
 function endGraph(payout,label,crashed){
-  clearInterval(graphTimer);graphRunning=false;liveIds=[];stopMusic();
+  cancelAnimationFrame(graphRaf);graphRunning=false;liveIds=[];stopMusic();
   drawGraph(crashed);
   $('graph-btn').textContent='시작하기';$('graph-btn').classList.remove('live');
-  if(crashed)$('graph-mult').style.color='#b42318';
+  $('graph-mult').classList.toggle('crash',crashed);
   playSound(payout>0?'win':'lose');
   settle(graphBet,payout,$('m_graph'),label);
 }
 $('graph-btn').onclick=()=>{
   if(graphRunning){
-    endGraph(Math.floor(graphBet*currentMult),`수익 실현 (${currentMult.toFixed(2)}x)`,false);return;
+    const mu=Math.min(currentMult,multAt(performance.now()-gStart));
+    endGraph(graphBet*mu,`수익 실현 (${mu.toFixed(2)}x)`,false);return;
   }
   const m=$('m_graph'),bet=getValidBet(m);if(!bet)return;
   graphBet=bet;graphRunning=true;liveIds=['graph-btn'];setBusy(true);startMusic('graph');
   $('graph-btn').textContent='수익 실현';$('graph-btn').classList.add('live');
-  currentMult=1;gpts=[1];$('graph-mult').style.color='';$('graph-mult').textContent='1.00x';
+  currentMult=1;gpts=[{t:0,v:1}];gElapsed=0;$('graph-mult').classList.remove('crash');$('graph-mult').textContent='1.00x';
   const crashAt=Math.min(50,Math.max(1,0.95/(1-Math.random())));
-  graphTimer=setInterval(()=>{
-    currentMult*=1.02;gpts.push(currentMult);
+  gStart=performance.now();let lastPush=0;
+  (function frame(now){
+    if(!graphRunning)return;
+    gElapsed=now-gStart;currentMult=multAt(gElapsed);
+    if(currentMult>=crashAt){
+      currentMult=crashAt;gElapsed=Math.log(crashAt)/Math.log(1.02)*70;
+      gpts.push({t:gElapsed,v:crashAt});
+      $('graph-mult').textContent=crashAt.toFixed(2)+'x';
+      endGraph(0,`그래프가 꺾였어요 (${crashAt.toFixed(2)}x)`,true);return;
+    }
+    if(gElapsed-lastPush>=70){gpts.push({t:gElapsed,v:currentMult});lastPush=gElapsed}
     $('graph-mult').textContent=currentMult.toFixed(2)+'x';
-    if(currentMult>=crashAt){endGraph(0,`그래프가 꺾였어요 (${currentMult.toFixed(2)}x)`,true);return}
     drawGraph();
-    m.className='msg';m.textContent='지금 실현하면 '+won(Math.floor(graphBet*currentMult));
-  },70);
+    m.className='msg';m.textContent='지금 실현하면 '+won(cut2(graphBet*currentMult));
+    graphRaf=requestAnimationFrame(frame);
+  })(gStart);
 };
 
 /* ===== 6. 홀짝 ===== */
@@ -829,20 +850,21 @@ function setDie(el,v){
   el.classList.toggle('one',v===1);
   el.querySelectorAll('i').forEach((p,i)=>p.classList.toggle('on',PIPS[v].includes(i)));
 }
-setDie($('d0'),1);setDie($('d1'),1);$('roll').onclick=()=>{
+setDie($('d0'),1);setDie($('d1'),1);
+$('roll').onclick=()=>{
   const m=$('m2'),bet=getValidBet(m);if(!bet)return;
   const pick=+document.querySelector('input[name=oe]:checked').value;
   setBusy(true);m.textContent='';m.className='msg';startMusic('oe');
-  const e0=$('d0'),e1=$('d1');
+  const e0=$('d0'),e1=$('d1'),rd=()=>1+Math.floor(Math.random()*6);
   e0.classList.add('rolling');e1.classList.add('rolling');
-  const iv=setInterval(()=>{setDie(e0,1+Math.floor(Math.random()*6));setDie(e1,1+Math.floor(Math.random()*6))},90);
+  const iv=setInterval(()=>{setDie(e0,rd());setDie(e1,rd())},90);
   setTimeout(()=>{
     stopMusic();clearInterval(iv);e0.classList.remove('rolling');e1.classList.remove('rolling');
-    const d=[1+Math.floor(Math.random()*6),1+Math.floor(Math.random()*6)];
+    const d=[rd(),rd()];
     setDie(e0,d[0]);setDie(e1,d[1]);
     const sum=d[0]+d[1],odd=sum%2;
-    if(odd===pick)playSound('win');else playSound('lose');
-    settle(bet,odd===pick?Math.floor(bet*1.9):0,m,`합계 ${sum} (${odd?'홀':'짝'})`);
+    playSound(odd===pick?'win':'lose');
+    settle(bet,odd===pick?bet*1.9:0,m,`합계 ${sum} (${odd?'홀':'짝'})`);
   },2200);
 };
 
@@ -851,7 +873,7 @@ let cur=null;
 const drawCard=()=>({r:1+Math.floor(Math.random()*13),s:SU[Math.floor(Math.random()*4)]});
 function paint(el,c){el.className='pcard'+(c.s==='♥'||c.s==='♦'?' red':'');el.innerHTML=RK[c.r-1]+'<small>'+c.s+'</small>'}
 function udOdds(){
-  const f=(p,id,t)=>{const b=$(id),m=p?0.95/p:0;b.dataset.m=m;b.innerHTML=t+'<small>'+(m?'×'+m.toFixed(2):'나올 수 없음')+'</small>'};
+  const f=(p,id,t)=>{const b=$(id),m=p?Math.floor(0.95/p*100)/100:0;b.dataset.m=m;b.innerHTML=t+'<small>'+(m?'×'+m.toFixed(2):'나올 수 없음')+'</small>'};
   f((13-cur.r)/13,'up','⬆ 높다');
   f(1/13,'eq','＝ 같다');
   f((cur.r-1)/13,'dn','⬇ 낮다');
@@ -864,18 +886,23 @@ function playUD(dir){
   const nx=drawCard();
   setTimeout(()=>{
     paint($('c1'),nx);$('c1').classList.add('flip');
-    const ok = dir==='up' ? nx.r>cur.r : (dir==='eq' ? nx.r===cur.r : nx.r<cur.r);
+    const ok=dir==='up'?nx.r>cur.r:(dir==='eq'?nx.r===cur.r:nx.r<cur.r);
     stopMusic();playSound(ok?'win':'lose');
     setTimeout(()=>{
-      settle(bet,ok?Math.floor(bet*mult):0,m,`${RK[cur.r-1]} → ${RK[nx.r-1]}`+(nx.r===cur.r&&dir!=='eq'?' (같은 숫자)':''));
-      cur=nx;paint($('c0'),cur);$('c1').className='pcard back';$('c1').textContent='?';udOdds();     },1300);   },600); }$('up').onclick=()=>playUD('up');$('eq').onclick=()=>playUD('eq');$('dn').onclick=()=>playUD('dn');
+      settle(bet,ok?bet*mult:0,m,`${RK[cur.r-1]} → ${RK[nx.r-1]}`+(nx.r===cur.r&&dir!=='eq'?' (같은 숫자)':''));
+      cur=nx;paint($('c0'),cur);$('c1').className='pcard back';$('c1').textContent='?';udOdds();
+    },1300);
+  },600);
+}
+$('up').onclick=()=>playUD('up');$('eq').onclick=()=>playUD('eq');$('dn').onclick=()=>playUD('dn');
 cur=drawCard();paint($('c0'),cur);udOdds();
 
+/* ===== 다시 시작 ===== */
 $('reset').onclick=()=>{
-  balance=100000;maxBalance=100000;totalGames=0;winGames=0;bet0=1000;
+  balance=START;maxBalance=START;totalGames=0;winGames=0;bet0=1000;
   isNewInput=true;
-  $('over').style.display='none';showBJBacks();
-  ['m0','m1','m_ladder','m_bj','m_graph','m2','m3'].forEach(i=>{if($(i))$(i).textContent=''});
+  $('over').style.display='none';showBJBacks();showWin=false;drawLadder();
+  ['m0','m1','m_ladder','m_bj','m_graph','m2','m3'].forEach(i=>{$(i).textContent='';$(i).className='msg'});
   refresh();
 };
 refresh();
