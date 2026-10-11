@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#120e2b">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>건전 카지노</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{--bg:#120e2b;--panel:#1d1745;--panel2:#262058;--line:rgba(150,120,255,.3);--gold:#ffd23f;--gold2:#ff9f1c;--ivory:#fff;--mute:#a9a3d6;--ok:#3be8c0;--bad:#ff7a9c;--pink:#ff5c8a;--violet:#7c5cff;--serif:"Jua","Noto Sans KR",sans-serif;--sans:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+html{color-scheme:dark;touch-action:manipulation;height:100%}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100%;color:var(--ivory);font-family:var(--sans);padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(24px + env(safe-area-inset-bottom,0px));overflow-x:hidden;
+background:radial-gradient(90% 50% at 15% -5%,rgba(255,92,138,.35),transparent 60%),radial-gradient(80% 50% at 100% 100%,rgba(124,92,255,.4),transparent 70%),var(--bg)}
+.wrap{max-width:500px;margin:0 auto}
+button{font-family:inherit}
+button:focus-visible,label:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+button:disabled{opacity:.38;cursor:not-allowed}
+
+header{text-align:center;padding:10px 0 16px}
+h1{font-family:var(--serif);font-weight:400;font-size:36px;letter-spacing:.02em;margin:0;background:linear-gradient(90deg,#ffd23f,#ff5c8a 60%,#a98bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rule{height:1px;width:120px;margin:10px auto 8px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.sub{font-size:12px;color:var(--mute);letter-spacing:.08em}
+
+.bal{display:flex;justify-content:space-between;align-items:flex-end;padding:18px 20px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(160deg,var(--panel2),var(--panel));box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.04)}
+.bal small{display:block;font-size:12px;color:var(--mute);margin-bottom:4px}
+.bal .big{font-family:var(--serif);font-size:30px;color:var(--gold);letter-spacing:.01em}
+.bal .mx{font-family:var(--serif);font-size:16px;color:var(--ivory)}
+.stats{display:flex;justify-content:space-between;padding:12px 6px 4px;font-size:12px;color:var(--mute)}
+.stats b{color:var(--ivory);font-weight:600;margin-left:4px}
+
+.tabs{display:flex;gap:6px;margin:14px 0 12px}
+.tabs button{flex:1;padding:11px 2px;background:rgba(255,255,255,.07);border:0;border-radius:99px;color:var(--mute);font-family:var(--serif);font-size:14px;cursor:pointer;transition:all .2s}
+.tabs button.on{color:#fff;background:linear-gradient(135deg,var(--pink),var(--violet))}
+
+.panel{border:1px solid var(--line);border-radius:24px;padding:18px;margin-bottom:14px;background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.hidden{display:none}
+
+/* 베팅 콘솔 */
+.bet{display:grid;grid-template-columns:1fr 1.15fr;gap:12px}
+.led{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;padding:12px 16px;border-radius:12px;background:#0c0824;border:1px solid var(--line)}
+.led span{font-size:12px;color:var(--mute)}
+.led b{font-family:var(--serif);font-size:24px;color:var(--gold);font-weight:400}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.keypad button{padding:11px 0;font-size:16px;font-family:var(--serif);color:var(--ivory);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.keypad button:active{background:rgba(150,120,255,.18)}
+.keypad .clr{color:var(--bad)}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start}
+.quick button{padding:14px 0;font-size:13px;color:var(--gold);background:transparent;border:1px solid var(--gold2);border-radius:10px;cursor:pointer}
+.quick button:active{background:rgba(150,120,255,.18)}
+.quick p{grid-column:1/-1;margin:6px 2px 0;font-size:11px;line-height:1.6;color:var(--mute)}
+
+.go{width:100%;margin-top:16px;padding:15px;font-family:var(--serif);font-size:17px;font-weight:400;letter-spacing:.05em;color:#fff;border:0;border-radius:16px;cursor:pointer;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 10px 24px rgba(124,92,255,.4)}
+.go:active{transform:translateY(1px)}
+.msg{min-height:24px;margin-top:14px;text-align:center;font-size:15px;font-weight:600}
+.win{color:var(--ok)}.lose{color:var(--bad)}
+.pay{font-size:12px;color:var(--mute);text-align:center;line-height:1.7}
+.pay b{color:var(--ivory);font-weight:600}
+
+/* 슬롯 */
+.cab{position:relative;padding:10px;border-radius:24px;background:linear-gradient(135deg,#ff5c8a,#7c5cff);box-shadow:0 14px 30px rgba(0,0,0,.5)}
+.cab.jackpot{animation:glow 1s ease-in-out 4}
+@keyframes glow{50%{box-shadow:0 0 50px 8px rgba(255,210,63,.8)}}
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:12px;background:#0c0824}
+.reel{position:relative;height:246px;overflow:hidden;border-radius:8px;background:linear-gradient(180deg,#1a1440,#2b2364 50%,#1a1440)}
+.reel::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 22%,transparent 78%,rgba(0,0,0,.55))}
+.strip{will-change:transform}
+.sym{height:82px;display:flex;align-items:center;justify-content:center;font-size:40px;border-bottom:1px solid rgba(150,120,255,.08)}
+.sym.hit{background:rgba(150,120,255,.26);box-shadow:inset 0 0 0 2px var(--gold);animation:pulse .5s infinite alternate}
+.sym.jp{background:rgba(236,217,166,.42);box-shadow:inset 0 0 0 2px #fff3c8,inset 0 0 22px rgba(255,243,200,.7)}
+@keyframes pulse{to{filter:brightness(1.3)}}
+#jp{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) scale(.9);text-align:center;font-family:var(--serif);font-size:30px;font-weight:400;letter-spacing:.06em;color:#fff3c8;text-shadow:0 0 18px #ffd23f,0 2px 6px #000;background:rgba(5,8,7,.78);padding:14px 0;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+#jp.show{opacity:1;transform:translateY(-50%) scale(1)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:14px 0 10px}
+.chips span{padding:4px 10px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:var(--ivory)}
+.chips i{font-style:normal;color:var(--gold);margin-left:4px;font-family:var(--serif)}
+
+/* 오리 경주 */
+.track{position:relative;height:44px;border-bottom:1px solid rgba(150,120,255,.12);transition:background .2s}
+.track.sel{background:linear-gradient(90deg,rgba(150,120,255,.14),transparent)}
+.track::after{content:"🏠";position:absolute;right:0;top:8px;font-size:22px}
+.sn{position:absolute;top:6px;font-size:28px;will-change:transform;transition:transform .05s linear}
+.lane{font-size:12px;color:var(--mute);margin-top:6px}
+.picks{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}
+.picks label,.oe label{text-align:center;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:13px;color:var(--mute);background:rgba(255,255,255,.02);transition:all .2s}
+.picks label{padding:11px 2px}
+.picks input,.oe input{position:absolute;opacity:0;pointer-events:none}
+.picks label:has(input:checked),.oe label:has(input:checked){border-color:var(--gold);background:rgba(150,120,255,.12);color:var(--gold)}
+
+/* 주사위 */
+.dice-box{display:flex;gap:28px;justify-content:center;align-items:center;height:110px;perspective:600px}
+.die{width:72px;height:72px;padding:10px;border-radius:16px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);place-items:center;
+background:linear-gradient(145deg,#fffaf0,#e4d9bd);box-shadow:0 14px 26px rgba(0,0,0,.55),inset 0 -4px 8px rgba(120,95,40,.28),inset 0 2px 3px #fff}
+.die i{width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3a3a,#050505);opacity:0;transition:opacity .08s}
+.die i.on{opacity:1}
+.die.one i.on{background:radial-gradient(circle at 35% 30%,#d65a5a,#7a1414);width:17px;height:17px}
+.die.rolling{animation:roll .7s ease-in-out infinite}
+@keyframes roll{0%{transform:translateY(0) rotate(0)}30%{transform:translateY(-34px) rotate(160deg)}60%{transform:translateY(0) rotate(300deg)}80%{transform:translateY(-14px) rotate(340deg)}100%{transform:translateY(0) rotate(360deg)}}
+.oe{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.oe label{padding:14px;font-family:var(--serif);font-size:16px}
+
+.cards{display:flex;gap:22px;justify-content:center;margin:6px 0 16px;perspective:700px}
+.pcard{width:86px;height:122px;border-radius:16px;background:#fff;color:#1d1745;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--serif);font-size:38px;line-height:1;box-shadow:0 12px 24px rgba(0,0,0,.45)}
+.pcard small{font-size:26px;margin-top:6px}
+.pcard.red{color:#e8335f}
+.pcard.back{background:repeating-linear-gradient(45deg,#ff5c8a 0 8px,#7c5cff 8px 16px);color:#fff;font-size:44px}
+.pcard.flip{animation:flip .5s}
+@keyframes flip{from{transform:rotateY(90deg)}}
+.udbtn{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.udbtn .go{margin-top:0;padding:12px 2px;font-size:15px;line-height:1.35}
+.udbtn .eq{background:linear-gradient(135deg,#ffd23f,#ff9f1c);color:#120e2b}
+.udbtn .dn{background:linear-gradient(135deg,#3be8c0,#2f8cff)}
+.udbtn small{display:block;font-size:12px;font-family:var(--sans);opacity:.92}
+#over{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9;padding:20px;background:rgba(5,8,7,.92)}
+#over>div{max-width:320px;width:100%;padding:28px;text-align:center;border:1px solid var(--gold2);border-radius:24px;background:var(--panel)}
+#over h2{font-family:var(--serif);font-weight:400;letter-spacing:.1em;color:var(--gold);margin:0 0 10px}
+#over p{color:var(--mute);font-size:13px;line-height:1.7;margin:0}
+button,label{user-select:none;-webkit-user-select:none}
+.panel,.bal{position:relative;border-color:rgba(150,120,255,.35);box-shadow:0 18px 40px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.09)}
+.bal .big,.led b,.stats b,.mx{font-variant-numeric:tabular-nums}
+.bal.up{animation:flashUp .9s}.bal.dn{animation:flashDn .6s}
+@keyframes flashUp{30%{box-shadow:0 0 0 2px var(--ok),0 0 32px rgba(59,232,192,.45)}}
+@keyframes flashDn{30%{box-shadow:0 0 0 2px var(--bad),0 0 24px rgba(255,122,156,.35)}}
+.tabs button.on{box-shadow:0 8px 20px rgba(124,92,255,.45)}
+.tabs button:not(.on):hover{background:rgba(255,255,255,.12)}
+.go{transition:transform .12s,filter .2s}.go:hover:not(:disabled){filter:brightness(1.1)}
+.keypad button,.quick button{transition:background .15s,transform .1s}
+.keypad button:active,.quick button:active{transform:scale(.95)}
+.reel{contain:layout paint}
+.sym{text-shadow:0 4px 10px rgba(0,0,0,.45)}
+.msg{font-family:var(--serif);font-size:17px;font-weight:400}
+.msg.win,.msg.lose{animation:pop .4s}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+.track{border-bottom-style:dashed}
+.fx{position:absolute;z-index:3;font-size:20px;pointer-events:none;animation:fx 1.5s ease-out forwards}
+@keyframes fx{to{transform:translate(var(--dx),calc(var(--dy) + 240px)) rotate(240deg);opacity:0}}
+header{position:relative}
+#snd{position:absolute;right:0;top:8px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.07);font-size:18px;cursor:pointer}
+#err{position:fixed;left:8px;right:8px;bottom:8px;z-index:20;display:none;padding:8px 12px;border-radius:10px;background:#5a1030;color:#fff;font-size:12px;word-break:break-all}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <button id="snd" aria-label="소리 켜기/끄기">🔊</button>
+    <h1>건전 카지노</h1>
+    <div class="rule"></div>
+    <div class="sub">건전이들을 위한 도파민 천국!</div>
+  </header>
+
+  <div class="bal">
+    <div><small>보유 자산</small><span class="big" id="bal">100,000원</span></div>
+    <div style="text-align:right"><small>최대 베팅</small><span class="mx" id="max">80,000원</span></div>
+  </div>
+  <div class="stats">
+    <span>전적<b id="st-record">0전 0승</b></span>
+    <span>승률<b id="st-rate">0%</b></span>
+    <span>최고 자산<b id="st-high">100,000원</b></span>
+  </div>
+
+  <div class="tabs">
+    <button class="on" data-t="slot">슬롯머신</button>
+    <button data-t="race">오리 경주</button>
+    <button data-t="oe">홀짝</button>
+    <button data-t="ud">업다운</button>
+  </div>
+
+  <div class="panel" id="slot">
+    <div class="cab" id="cab">
+      <div class="reels">
+        <div class="reel"><div class="strip" id="col0"></div></div>
+        <div class="reel"><div class="strip" id="col1"></div></div>
+        <div class="reel"><div class="strip" id="col2"></div></div>
+      </div>
+      <div id="jp">JACKPOT ×25</div>
+    </div>
+    <div class="chips"><span>🍒<i>×1</i></span><span>🍋<i>×2</i></span><span>🔔<i>×3</i></span><span>⭐<i>×4</i></span><span>7️⃣<i>×5</i></span><span>💎<i>×7</i></span></div>
+    <div class="pay">
+      가로 3줄, 세로 3줄, 대각선 2줄까지 <b>총 8라인</b> 빙고<br>
+      12시·3시·6시·9시 칸이 같은 문양이면 <b>잭팟 ×25</b>
+    </div>
+    <button class="go" id="spin">SPIN</button>
+    <div class="msg" id="m0"></div>
+  </div>
+
+  <div class="panel hidden" id="race">
+    <div id="lanes"></div>
+    <div class="picks" id="picks"></div>
+    <div class="pay" style="margin-top:12px">경주 중에는 선택을 바꿀 수 없습니다. 우승하면 3.6배</div>
+    <button class="go" id="start">출발</button>
+    <div class="msg" id="m1"></div>
+  </div>
+
+  <div class="panel hidden" id="oe">
+    <div class="dice-box"><div class="die" id="d0"></div><div class="die" id="d1"></div></div>
+    <div class="pay">두 주사위의 합이 홀수인지 짝수인지 맞혀보세요. 배당 1.9배</div>
+    <div class="oe">
+      <label><input type="radio" name="oe" value="1" checked>홀</label>
+      <label><input type="radio" name="oe" value="0">짝</label>
+    </div>
+    <button class="go" id="roll">주사위 던지기</button>
+    <div class="msg" id="m2"></div>
+  </div>
+
+  <div class="panel hidden" id="ud">
+    <div class="cards"><div class="pcard" id="c0"></div><div class="pcard back" id="c1">?</div></div>
+    <div class="pay">다음 카드가 지금 카드보다 높을지, 낮을지, 같을지 맞혀보세요<br>A는 1, K는 13이고 확률에 따라 배당이 바뀝니다</div>
+    <div class="udbtn" style="margin-top:14px"><button class="go" id="up"></button><button class="go eq" id="eq"></button><button class="go dn" id="dn"></button></div>
+    <div class="msg" id="m3"></div>
+  </div>
+
+  <div class="panel">
+    <div class="bet">
+      <div class="led"><span>베팅 금액</span><b id="bet-led">1,000원</b></div>
+      <div class="keypad" id="keypad">
+        <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+        <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+        <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+        <button class="clr" data-k="c">지움</button><button data-k="0">0</button><button data-k="000">000</button>
+      </div>
+      <div class="quick">
+        <button data-p="min">최소</button><button data-p="0.25">1/4</button>
+        <button data-p="0.5">1/2</button><button data-p="1.0">최대</button>
+        <p>최소 1,000원<br>최대 <span id="max-limit-txt">80,000</span>원</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="err"></div>
+<div id="over"><div>
+  <h2>파산</h2>
+  <p>가상 자산을 모두 사용했습니다.<br>100,000원으로 다시 시작할 수 있습니다.</p>
+  <button class="go" id="reset" style="letter-spacing:.05em;font-size:15px">다시 시작</button>
+</div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+window.addEventListener('error',e=>{const b=document.getElementById('err');if(b){b.style.display='block';b.textContent='오류: '+e.message+' (줄 '+e.lineno+')'}});
+const won=n=>n.toLocaleString('ko-KR')+'원';
+let balance=100000,maxBalance=100000,totalGames=0,winGames=0,busy=false,bet0=1000;
+let prevGrid=null;let isNewInput=true; // 새로 숫자를 입력하기 시작할 때 기존 값을 지우기 위한 플래그
+const maxBet=()=>balance>=1000?Math.max(1000,Math.floor(balance*0.8)):0;
+
+function updateBetLed(){
+  const m=maxBet(); if(bet0>m)bet0=m;
+  $('bet-led').textContent=won(bet0);
+  $('max-limit-txt').textContent=m.toLocaleString('ko-KR');$('max').textContent=won(m);
+}
+document.querySelectorAll('.keypad button').forEach(b=>b.onclick=()=>{
+  if(busy)return;
+  const k=b.dataset.k;
+  const m=maxBet();
+  if(k==='c'){
+    bet0=0;
+    isNewInput=true;
+  }else{
+    let v;
+    if(k==='000'){
+      // 000은 기존에 입력 중이던 값 뒤에 붙는 방식 유지
+      v=parseInt((bet0?String(bet0):'')+k,10)||0;
+    }else{
+      // 일반 숫자는 새로 누를 때 초기화 후 입력, 연속으로 누르면 뒤에 붙음
+      if(isNewInput){
+        v=parseInt(k,10)||0;
+        isNewInput=false;
+      }else{
+        v=parseInt(String(bet0)+k,10)||0;
+      }
+    }
+    bet0=Math.min(v,m);
+  }
+  updateBetLed();
+});
+document.querySelectorAll('.quick button').forEach(b=>b.onclick=()=>{
+  if(busy)return;
+  const p=b.dataset.p,m=maxBet();
+  if(p==='min')bet0=Math.min(1000,m);
+  else if(p==='1.0')bet0=m;
+  else bet0=Math.max(1000,Math.floor(balance*parseFloat(p)));
+  isNewInput=true;
+  updateBetLed();
+});
+function getValidBet(el){
+  const m=maxBet();
+  if(!bet0||bet0<1000){el.className='msg lose';el.textContent='최소 베팅 금액은 1,000원입니다.';isNewInput=true;return null}
+  if(bet0>m){el.className='msg lose';el.textContent='최대 '+won(m)+'까지 베팅할 수 있습니다.';isNewInput=true;return null}
+  isNewInput=true;
+  return bet0;
+}
+
+const AC=window.AudioContext||window.webkitAudioContext;
+function tone(...a){try{_tone(...a)}catch(e){}}
+let audioCtx=null,soundOn=true,musicTimer=null,mstep=0;
+function _tone(f,t,d,type,v){
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+  o.type=type||'triangle';o.connect(g);g.connect(audioCtx.destination);
+  const s=audioCtx.currentTime+t;
+  o.frequency.setValueAtTime(f,s);g.gain.setValueAtTime(v||.08,s);g.gain.linearRampToValueAtTime(.005,s+d);
+  o.start(s);o.stop(s+d);
+}
+function playSound(type){try{_playSound(type)}catch(e){}}
+function _playSound(type){
+  if(!soundOn)return;
+  if(!audioCtx&&AC)audioCtx=new AC();
+  if(!audioCtx)return;
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  if(type==='click')tone(660,0,.05,'sine',.05);
+  else if(type==='press'){tone(440,0,.07,'triangle',.07);tone(880,.05,.1,'triangle',.06)}
+  else if(type==='spin')tone(200,0,.04,'sine',.05);
+  else if(type==='win'){tone(523,0,.15);tone(659,.1,.15);tone(784,.2,.25)}
+  else if(type==='jackpot'){[523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*.12,.3,'triangle',.1))}
+  else if(type==='lose'){tone(180,0,.15,'sawtooth',.05);tone(110,.15,.2,'sawtooth',.05)}
+}
+
+let shown=100000;
+function tweenBal(){
+  const from=shown,to=balance,t0=performance.now(),el=$('bal');
+  (function step(t){const k=Math.min(1,(t-t0)/500);shown=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));el.textContent=won(shown);if(k<1)requestAnimationFrame(step)})(t0);
+}
+/* ===== 배경 음악 (합성) ===== */
+const TUNES={
+  slot:{ms:125,wave:'triangle',mel:[523,659,784,988,784,659,880,1047,988,784,659,784,880,784,659,523],bass:[131,131,175,196]},
+  race:{ms:95,wave:'square',mel:[392,392,523,392,440,440,587,440,494,494,659,494,523,659,784,659],bass:[98,98,110,131]}
+};
+function startMusic(k){try{_startMusic(k)}catch(e){}}
+function _startMusic(k){
+  stopMusic();if(!soundOn)return;
+  if(!audioCtx&&AC)audioCtx=new AC();
+  if(!audioCtx)return;
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  const T=TUNES[k];mstep=0;
+  const tick=()=>{
+    const i=mstep%16,d=T.ms/1000;
+    tone(T.mel[i],0,d*1.6,T.wave,.03);
+    if(i%4===0)tone(T.bass[i/4],0,d*3,'sine',.08);
+    if(i%2===1)tone(3200,0,.02,'square',.008);
+    mstep++;
+  };
+  tick();musicTimer=setInterval(tick,T.ms);
+}
+function stopMusic(){clearInterval(musicTimer);musicTimer=null}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopMusic()});
+$('snd').onclick=()=>{soundOn=!soundOn;$('snd').textContent=soundOn?'🔊':'🔇';if(!soundOn)stopMusic();else playSound('click')};
+document.addEventListener('click',e=>{
+  if(e.target.tagName==='INPUT'||e.target.id==='snd')return;
+  const b=e.target.closest('button,label');
+  if(!b||b.disabled)return;
+  const i=b.querySelector('input');if(i&&i.disabled)return;
+  playSound(b.classList.contains('go')?'press':'click');
+});
+
+function refresh(){
+  tweenBal();
+  if(balance>maxBalance)maxBalance=balance;
+  updateBetLed();
+  $('st-record').textContent=`${totalGames}전 ${winGames}승`;
+  $('st-rate').textContent=totalGames?Math.round(winGames/totalGames*100)+'%':'0%';
+  $('st-high').textContent=won(maxBalance);
+  if(balance<1000)$('over').style.display='flex';
+}
+let bw=null;
+function setBusy(v){
+  busy=v;clearTimeout(bw);
+  if(v)bw=setTimeout(()=>{if(busy){stopMusic();setBusy(false);refresh()}},15000);
+  document.querySelectorAll('.go,.tabs button,.keypad button,.quick button,input[name=sn],input[name=oe]').forEach(e=>e.disabled=v);
+}
+function settle(bet,payout,el,label){
+  totalGames++;balance+=payout-bet;
+  const bc=document.querySelector('.bal');bc.classList.remove('up','dn');void bc.offsetWidth;if(payout!==bet)bc.classList.add(payout>bet?'up':'dn');
+  if(payout>bet){winGames++;el.className='msg win';el.textContent=label+'  +'+won(payout-bet)}
+  else if(payout===bet){el.className='msg';el.textContent=label+'  본전'}
+  else{el.className='msg lose';el.textContent=label+'  -'+won(bet)}
+  setBusy(false);refresh();
+}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  if(busy)return;
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  ['slot','race','oe','ud'].forEach(t=>$(t).classList.toggle('hidden',t!==b.dataset.t));
+});
+
+/* ===== 슬롯머신: 가로3 + 세로3 + 대각선2 + 12·3·6·9시 잭팟 ===== */
+const SYM=[['🍒',1],['🍋',2],['🔔',3],['⭐',4],['7️⃣',5],['💎',7]];
+const ROWH=82,STOP=30;
+function initReels(){
+  for(let c=0;c<3;c++){
+    const col=$('col'+c);col.innerHTML='';
+    for(let j=0;j<40;j++){
+      const d=document.createElement('div');d.className='sym';
+      d.textContent=SYM[Math.floor(Math.random()*SYM.length)][0];
+      col.appendChild(d);
+    }
+  }
+}
+initReels();
+// grid[열][행]
+const LINES=[
+  [[0,0],[1,0],[2,0]],[[0,1],[1,1],[2,1]],[[0,2],[1,2],[2,2]],   // 가로
+  [[0,0],[0,1],[0,2]],[[1,0],[1,1],[1,2]],[[2,0],[2,1],[2,2]],   // 세로
+  [[0,0],[1,1],[2,2]],[[0,2],[1,1],[2,0]]                        // 대각선
+];
+const JACKPOT=[[1,0],[2,1],[1,2],[0,1]]; // 12시, 3시, 6시, 9시
+const JP_MULT=25;
+
+function burst(){
+  const cab=$('cab');
+  for(let i=0;i<26;i++){
+    const e=document.createElement('span');e.className='fx';e.textContent=['✨','⭐','💛','💎'][i%4];
+    e.style.cssText=`left:50%;top:50%;--dx:${(Math.random()-.5)*320}px;--dy:${-60-Math.random()*180}px;animation-delay:${Math.random()*.25}s`;
+    cab.appendChild(e);setTimeout(()=>e.remove(),1800);
+  }
+}
+function runSlotSpin(bet){
+  const m=$('m0');setBusy(true);
+  m.textContent='릴이 돌아가는 중입니다…';m.className='msg';startMusic('slot');
+  $('jp').classList.remove('show');$('cab').classList.remove('jackpot');
+  document.querySelectorAll('.sym').forEach(e=>e.classList.remove('hit','jp'));
+  const grid=[0,1,2].map(()=>[0,1,2].map(()=>Math.floor(Math.random()*SYM.length)));
+  const old=prevGrid;prevGrid=grid;
+  for(let c=0;c<3;c++){
+    const col=$('col'+c),kids=col.children;
+    for(let r=0;r<3;r++)kids[STOP+r].textContent=SYM[grid[c][r]][0];
+    if(old)for(let r=0;r<3;r++)kids[r].textContent=SYM[old[c][r]][0];
+    col.style.transition='none';col.style.transform='translateY(0)';
+    void col.offsetHeight;
+    setTimeout(()=>{
+      playSound('spin');
+      col.style.transition=`transform ${2.5+c*.6}s cubic-bezier(.12,.8,.1,1.02)`;
+      col.style.transform=`translateY(-${STOP*ROWH}px)`;
+    },50);
+  }
+  setTimeout(()=>{
+    stopMusic();let mult=0,n=0;const hits=[];
+    LINES.forEach(l=>{
+      const [a,b,c]=l.map(([x,y])=>grid[x][y]);
+      if(a===b&&b===c){n++;mult+=SYM[a][1];hits.push(...l)}
+    });
+    const j=JACKPOT.map(([x,y])=>grid[x][y]);
+    const isJP=j.every(v=>v===j[0]);
+    hits.forEach(([c,r])=>$('col'+c).children[STOP+r].classList.add('hit'));
+    if(isJP){
+      mult+=JP_MULT;
+      JACKPOT.forEach(([c,r])=>{const e=$('col'+c).children[STOP+r];e.classList.remove('hit');e.classList.add('jp')});
+      $('jp').classList.add('show');burst();$('cab').classList.add('jackpot');
+      playSound('jackpot');
+      setTimeout(()=>$('jp').classList.remove('show'),2600);
+    }else if(n)playSound('win');
+    else playSound('lose');
+    let label='꽝';
+    if(isJP)label=`잭팟 ×${JP_MULT}`+(n?` + ${n}라인 빙고`:'');
+    else if(n)label=`${n}라인 빙고 (배당 ×${mult})`;
+    settle(bet,bet*mult,m,label);
+  },4200);
+}
+$('spin').onclick=()=>{const b=getValidBet($('m0'));if(b)runSlotSpin(b)};
+
+/* ===== 오리 경주 ===== */
+const NAMES=['빨강','파랑','초록','노랑'],COLS=['#e0646e','#6ea8ff','#7fd1a4','#ffe27a'];
+let pos=[0,0,0,0];
+$('lanes').innerHTML=NAMES.map((n,i)=>`<div class="lane">${i+1}번 ${n}</div><div class="track" id="track-${i}"><span class="sn" id="s${i}" style="left:0;filter:drop-shadow(0 0 5px ${COLS[i]})"><span class="crown" style="position:absolute;top:-14px;left:4px;font-size:14px;display:none">👑</span><span style="display:inline-block;transform:scaleX(-1)">🦆</span></span></div>`).join('');
+$('picks').innerHTML=NAMES.map((n,i)=>`<label><input type="radio" name="sn" value="${i}" ${i?'':'checked'}>${i+1}번 ${n}</label>`).join('');
+function hl(){const s=document.querySelector('input[name=sn]:checked').value;for(let i=0;i<4;i++)$('track-'+i).classList.toggle('sel',i==s)}
+document.querySelectorAll('input[name=sn]').forEach(r=>r.onchange=hl);hl();
+
+$('start').onclick=()=>{
+  const m=$('m1'),bet=getValidBet(m);if(!bet)return;
+  const pick=+document.querySelector('input[name=sn]:checked').value;
+  setBusy(true);m.textContent='';m.className='msg';pos=[0,0,0,0];const TW=$('track-0').clientWidth-44;startMusic('race');
+  for(let i=0; i<4; i++) {
+    const crown = $('s'+i).querySelector('.crown');
+    if(crown) crown.style.display = 'none';
+  }
+  const spd=[0,0,0,0].map(()=>1.0+Math.random()*0.5);
+  const iv=setInterval(()=>{
+    for(let i=0;i<4;i++){
+      spd[i]+=(Math.random()-0.5)*0.3;
+      spd[i]=Math.max(0.7,Math.min(1.9,spd[i]));
+      pos[i]+=spd[i]*(0.8+Math.random()*0.4);
+      const p=Math.min(pos[i],100);
+      $('s'+i).style.transform=`translateX(${p/100*TW}px)`;
+    }
+    const maxP=Math.max(...pos);
+    for(let i=0;i<4;i++){
+      const crown = $('s'+i).querySelector('.crown');
+      if(crown) crown.style.display = (maxP > 0 && pos[i] === maxP) ? 'block' : 'none';
+    }
+    if(maxP>=100){
+      clearInterval(iv);stopMusic();
+      const w=pos.indexOf(maxP);
+      for(let i=0; i<4; i++) {
+        const crown = $('s'+i).querySelector('.crown');
+        if(crown) crown.style.display = (i === w) ? 'block' : 'none';
+      }
+      if(w===pick)playSound('win');else playSound('lose');
+      settle(bet,w===pick?Math.floor(bet*3.6):0,m,`${w+1}번 ${NAMES[w]} 우승`);
+    }
+  },50);
+};
+
+/* ===== 홀짝 (CSS 핍 주사위) ===== */
+const PIPS={1:[4],2:[2,6],3:[2,4,6],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+['d0','d1'].forEach(id=>{$(id).innerHTML='<i></i>'.repeat(9)});
+function setDie(el,v){
+  el.classList.toggle('one',v===1);
+  el.querySelectorAll('i').forEach((p,i)=>p.classList.toggle('on',PIPS[v].includes(i)));
+}
+setDie($('d0'),1);setDie($('d1'),1);$('roll').onclick=()=>{
+  const m=$('m2'),bet=getValidBet(m);if(!bet)return;
+  const pick=+document.querySelector('input[name=oe]:checked').value;
+  setBusy(true);m.textContent='';m.className='msg';
+  const e0=$('d0'),e1=$('d1');
+  e0.classList.add('rolling');e1.classList.add('rolling');
+  const iv=setInterval(()=>{setDie(e0,1+Math.floor(Math.random()*6));setDie(e1,1+Math.floor(Math.random()*6))},90);
+  setTimeout(()=>{
+    clearInterval(iv);e0.classList.remove('rolling');e1.classList.remove('rolling');
+    const d=[1+Math.floor(Math.random()*6),1+Math.floor(Math.random()*6)];
+    setDie(e0,d[0]);setDie(e1,d[1]);
+    const sum=d[0]+d[1],odd=sum%2;
+    if(odd===pick)playSound('win');else playSound('lose');
+    settle(bet,odd===pick?Math.floor(bet*1.9):0,m,`합계 ${sum} (${odd?'홀':'짝'})`);
+  },2200);
+};
+
+/* ===== 업다운 (업 / 같음 / 다운) ===== */
+const RK=['A','2','3','4','5','6','7','8','9','10','J','Q','K'],SU=['♠','♥','♦','♣'];
+let cur=null;
+const draw=()=>({r:1+Math.floor(Math.random()*13),s:SU[Math.floor(Math.random()*4)]});
+function paint(el,c){el.className='pcard'+(c.s==='♥'||c.s==='♦'?' red':'');el.innerHTML=RK[c.r-1]+'<small>'+c.s+'</small>'}
+function udOdds(){
+  const f=(p,id,t)=>{const b=$(id),m=p?0.95/p:0;b.dataset.m=m;b.innerHTML=t+'<small>'+(m?'×'+m.toFixed(2):'나올 수 없음')+'</small>'};
+  f((13-cur.r)/13,'up','⬆ 높다');
+  f(1/13,'eq','＝ 같다');
+  f((cur.r-1)/13,'dn','⬇ 낮다');
+}
+function playUD(dir){
+  const m=$('m3'),bet=getValidBet(m);if(!bet)return;
+  const mult=+$(dir).dataset.m;
+  if(!mult){m.className='msg lose';m.textContent='그 방향은 나올 수 없어요.';return}
+  setBusy(true);m.textContent='';m.className='msg';
+  const nx=draw();
+  setTimeout(()=>{
+    paint($('c1'),nx);$('c1').classList.add('flip');
+    const ok = dir==='up' ? nx.r>cur.r : (dir==='eq' ? nx.r===cur.r : nx.r<cur.r);
+    playSound(ok?'win':'lose');
+    setTimeout(()=>{
+      settle(bet,ok?Math.floor(bet*mult):0,m,`${RK[cur.r-1]} → ${RK[nx.r-1]}`+(nx.r===cur.r&&dir!=='eq'?' (같은 숫자)':''));
+      cur=nx;paint($('c0'),cur);$('c1').className='pcard back';$('c1').textContent='?';udOdds();     },1300);   },600); }$('up').onclick=()=>playUD('up');$('eq').onclick=()=>playUD('eq');$('dn').onclick=()=>playUD('dn');
+cur=draw();paint($('c0'),cur);udOdds();
+
+$('reset').onclick=()=>{
+  balance=100000;maxBalance=100000;totalGames=0;winGames=0;bet0=1000;
+  isNewInput=true;
+  $('over').style.display='none';
+  ['m0','m1','m2'].forEach(i=>$(i).textContent='');
+  refresh();
+};
+refresh();
+</script>
+</body>
+</html>
